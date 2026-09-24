@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/car-damage-demo/index.html" },
+    { "source": "/car-damage", "destination": "/car-damage-demo/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/car-damage-demo/(.*)",
+      "headers": [
+        { "key": "Cross-Origin-Opener-Policy", "value": "same-origin" },
+        { "key": "Cross-Origin-Embedder-Policy", "value": "credentialless" }
+      ]
+    }
+  ]
+}
