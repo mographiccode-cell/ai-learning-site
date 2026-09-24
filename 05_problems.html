@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>الفصل الخامس — مشاكل البيانات الشائعة Common Data Problems</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared.css">
+</head>
+<body class="bg-gray-950 text-white font-['Tajawal'] min-h-screen">
+<nav class="sticky top-0 z-50 bg-gray-950/80 backdrop-blur-xl border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-8 py-3 flex items-center justify-between">
+        <a href="04_evaluation.html" class="text-gray-400 hover:text-white transition">→ الفصل السابق</a>
+        <span class="text-rose-400 font-bold">Chapter 5 — الفصل ٥ من ٥</span>
+        <a href="index.html" class="text-rose-400 hover:text-rose-300 transition">الرئيسية ←</a>
+    </div>
+</nav>
+<main class="max-w-7xl mx-auto px-8 py-14">
+    <div class="mb-14">
+        <div class="inline-flex items-center gap-2 bg-rose-500/10 border border-rose-500/20 rounded-full px-5 py-2 text-rose-300 mb-4">🛡️ Chapter 5 — الفصل الخامس</div>
+        <h1 class="text-4xl md:text-5xl font-black mb-5">مشاكل البيانات الشائعة <span class="term">Common Data Problems & Pitfalls</span></h1>
+        <p class="text-gray-400 text-xl leading-9">هذه المشاكل قد تدمر نموذجك <span class="term">Model</span> حتى لو كان التدريب <span class="term">Training</span> يبدو ناجحاً. تعلّم كيف تتعرف عليها وتتجنبها.</p>
+    </div>
+
+    <!-- 1. Overfitting -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-rose-300">١. الإفراط في التعلم <span class="term">Overfitting</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-5">النموذج <strong>"يحفظ" <span class="term">Memorizes</span> بيانات التدريب</strong> بدلاً من أن يتعلم الأنماط العامة <span class="term">General Patterns</span>. نتائج ممتازة على التدريب لكن سيئة على بيانات جديدة <span class="term">New/Unseen Data</span>.</p>
+
+        <!-- Diagram -->
+        <div class="rounded-2xl overflow-hidden border border-white/10 mb-6">
+            <img src="assets/images/overfitting_simple.png" alt="Overfitting vs Underfitting vs Good Fit" class="w-full object-contain max-h-72">
+            <p class="text-center text-gray-500 text-sm py-3 bg-white/5">📊 مخطط توضيحي — الفرق بين Underfitting والتوافق الجيد والـ Overfitting <span class="term">Underfitting / Good Fit / Overfitting Comparison</span></p>
+        </div>
+
+        <div class="example-box">
+            <p class="text-gray-300 leading-9 text-lg"><strong>مثال:</strong> طالب حفظ 200 سؤال امتحان سابق حرفياً. لو جاء نفس السؤال يحله فوراً (= <span class="term">Training Accuracy 100%</span>). لكن إذا صيغة السؤال تغيرت قليلاً ← لا يعرف يحله (= <span class="term">Test Accuracy 40%</span>). المشكلة: حفظ بدون فهم!</p>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-7">
+            <h4 class="font-bold text-lg mb-3 text-emerald-300">كيف تكتشفه؟ <span class="term">How to Detect?</span></h4>
+            <p class="text-gray-300 leading-9 mb-4"><span class="term">Training Loss</span> ينزل ← لكن <span class="term">Validation Loss</span> يبدأ <strong>بالارتفاع</strong>. الفجوة <span class="term">Gap</span> بينهما تزداد.</p>
+            <h4 class="font-bold text-lg mb-3 text-emerald-300">كيف تعالجه؟ <span class="term">Solutions</span></h4>
+            <ul class="text-gray-300 leading-9 space-y-2">
+                <li>✅ زيادة بيانات التدريب <span class="term">More Training Data</span> أو استخدام <span class="term">Data Augmentation</span></li>
+                <li>✅ تقليل تعقيد النموذج <span class="term">Simpler Model Architecture</span></li>
+                <li>✅ <span class="term">Early Stopping</span> — إيقاف التدريب عندما يبدأ <span class="term">Val Loss</span> بالارتفاع</li>
+                <li>✅ <span class="term">Dropout</span> — إطفاء عشوائي لبعض الخلايا العصبية <span class="term">Neurons</span> أثناء التدريب</li>
+                <li>✅ <span class="term">Regularization (L1/L2)</span> — إضافة عقوبة على الأوزان الكبيرة</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 2. Underfitting -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-rose-300">٢. قصور التعلم <span class="term">Underfitting</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-5">النموذج <strong>لم يتعلم كفاية <span class="term">Hasn't Learned Enough</span></strong>. نتائجه سيئة حتى على بيانات التدريب <span class="term">Training Data</span> نفسها.</p>
+        <div class="example-box">
+            <p class="text-gray-300 leading-9 text-lg"><strong>مثال:</strong> طالب ذاكر 5 دقائق فقط للامتحان. لا يعرف يحل أي سؤال — لا من الكتاب ولا أسئلة جديدة. ببساطة لم يدرس كفاية!</p>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-7">
+            <h4 class="font-bold text-lg mb-3 text-emerald-300">الحلول <span class="term">Solutions</span>:</h4>
+            <ul class="text-gray-300 leading-9 space-y-2">
+                <li>✅ زيادة عدد <span class="term">Epochs</span></li>
+                <li>✅ استخدام نموذج أكبر وأعقد <span class="term">Larger Model Capacity</span></li>
+                <li>✅ التأكد من جودة البيانات والتوصيف <span class="term">Data & Label Quality</span></li>
+                <li>✅ تعديل <span class="term">Learning Rate</span> — قد يكون صغيراً جداً</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 3. Data Imbalance -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-rose-300">٣. عدم توازن البيانات <span class="term">Data Imbalance / Class Imbalance</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-5">عندما تكون <strong>فئة <span class="term">Class</span> أكثر بكثير من الباقي</strong>. النموذج يصبح متحيزاً <span class="term">Biased</span> للفئة الأكثر ويتجاهل الأقل.</p>
+
+        <!-- Diagram -->
+        <div class="rounded-2xl overflow-hidden border border-white/10 mb-6">
+            <img src="assets/images/bias_leakage_simple.png" alt="Data Bias and Data Leakage Diagram" class="w-full object-contain max-h-72">
+            <p class="text-center text-gray-500 text-sm py-3 bg-white/5">📊 مخطط توضيحي — تحيز البيانات والتسريب <span class="term">Data Bias & Data Leakage</span></p>
+        </div>
+
+        <div class="example-box">
+            <p class="text-gray-300 leading-9 text-lg"><strong>مثال:</strong> نظام كشف احتيال بطاقات ائتمان: 99.9% من المعاملات طبيعية و0.1% احتيال. النموذج يتعلم يقول دائماً "طبيعي" ← يحصل 99.9% دقة <span class="term">Accuracy</span> بدون ما يكتشف أي احتيال فعلياً! هذا <span class="term">Accuracy Paradox</span>.</p>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-7">
+            <h4 class="font-bold text-lg mb-3 text-emerald-300">الحلول <span class="term">Solutions</span>:</h4>
+            <ul class="text-gray-300 leading-9 space-y-2">
+                <li>✅ <span class="term">Oversampling</span> — تكرار عينات الفئة القليلة (مثل <span class="term">SMOTE</span>)</li>
+                <li>✅ <span class="term">Undersampling</span> — تقليل عينات الفئة الكثيرة</li>
+                <li>✅ <span class="term">Class Weights</span> — إعطاء وزن أكبر للفئة القليلة في <span class="term">Loss Function</span></li>
+                <li>✅ جمع بيانات إضافية <span class="term">Collect More Data</span> للفئة الناقصة</li>
+                <li>✅ استخدام مقاييس مناسبة: <span class="term">F1-Score</span> بدلاً من <span class="term">Accuracy</span></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 4. Bias -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-rose-300">٤. التحيز <span class="term">Bias in Data & Models</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-5">عندما تكون البيانات <strong>غير ممثلة للواقع <span class="term">Not Representative of Reality</span></strong>، النموذج يتعلم أنماطاً خاطئة أو يفضل مجموعة على أخرى.</p>
+        <div class="example-box">
+            <p class="text-gray-300 leading-9 text-lg"><strong>مثال شهير:</strong> نظام تعرف على الوجوه دُرِّب بأغلبية وجوه أوروبية. عند استخدامه على وجوه أفريقية أو آسيوية ← أداء سيء جداً! لأنه <strong>متحيز <span class="term">Biased</span></strong> لنوع البيانات التي رآها أكثر.</p>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-7">
+            <h4 class="font-bold text-lg mb-4">أنواع التحيز <span class="term">Types of Bias</span>:</h4>
+            <div class="space-y-4">
+                <div class="flex items-start gap-4">
+                    <span class="bg-rose-500/20 text-rose-300 px-3 py-1 rounded font-bold mt-1">1</span>
+                    <div><strong class="text-white text-lg"><span class="term">Selection Bias</span> — تحيز الاختيار</strong><p class="text-gray-400 mt-1">البيانات لا تمثل كل الحالات الممكنة (مثال: صور نهارية فقط = لا يعمل بالليل)</p></div>
+                </div>
+                <div class="flex items-start gap-4">
+                    <span class="bg-rose-500/20 text-rose-300 px-3 py-1 rounded font-bold mt-1">2</span>
+                    <div><strong class="text-white text-lg"><span class="term">Labeling Bias</span> — تحيز التسمية</strong><p class="text-gray-400 mt-1">الشخص المُوصِّف ارتكب أخطاء أو كان متحيزاً في قراراته</p></div>
+                </div>
+                <div class="flex items-start gap-4">
+                    <span class="bg-rose-500/20 text-rose-300 px-3 py-1 rounded font-bold mt-1">3</span>
+                    <div><strong class="text-white text-lg"><span class="term">Confirmation Bias</span> — تحيز التأكيد</strong><p class="text-gray-400 mt-1">اختيار بيانات تؤكد فرضية الباحث فقط وتجاهل البيانات المعاكسة</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Data Leakage -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-rose-300">٥. تسريب البيانات <span class="term">Data Leakage</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-5">يحدث عندما <strong>تتسرب معلومات من بيانات الاختبار <span class="term">Test Set</span> إلى بيانات التدريب <span class="term">Training Set</span></strong>. النتائج تبدو ممتازة لكنها <strong>مزيفة <span class="term">Artificially Inflated</span></strong>!</p>
+        <div class="warn-box">
+            <p class="text-gray-300 leading-9 text-lg">هذه <strong>أخطر مشكلة <span class="term">Most Dangerous Problem</span></strong> لأنها تعطيك <span class="term">False Confidence</span> — تظن النموذج ممتاز لكن في الواقع <span class="term">Production</span> أداؤه سيء!</p>
+        </div>
+        <div class="example-box">
+            <p class="text-gray-300 leading-9 text-lg"><strong>مثال:</strong> عندك 100 صورة أشعة لمريض واحد. قسمتها عشوائياً: 80 للتدريب و20 للاختبار. النموذج لا يتعلم تشخيص المرض — بل يتعلم <strong>التعرف على المريض نفسه</strong>! لأن صور نفس الشخص في المجموعتين.</p>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-7">
+            <h4 class="font-bold text-lg mb-3 text-emerald-300">كيف تتجنبه؟ <span class="term">Prevention</span></h4>
+            <ul class="text-gray-300 leading-9 space-y-2">
+                <li>✅ قسّم البيانات <strong>قبل <span class="term">Before</span></strong> أي معالجة <span class="term">Preprocessing</span> أو تضخيم <span class="term">Augmentation</span></li>
+                <li>✅ تأكد من عدم تكرار نفس المصادر <span class="term">No Source Overlap</span> بين المجموعات</li>
+                <li>✅ استخدم <span class="term">Group-based Splitting</span> — كل مجموعة بيانات من نفس المصدر تذهب كلها لمجموعة واحدة</li>
+                <li>✅ <span class="term">Cross-Validation</span> — التحقق المتقاطع لاكتشاف التسريب</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 6. Noisy Labels -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-rose-300">٦. تسميات خاطئة <span class="term">Noisy Labels / Mislabeled Data</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-5">عندما تكون <strong>التسميات غير دقيقة <span class="term">Inaccurate Annotations</span></strong>. النموذج يتعلم معلومات خاطئة <span class="term">Learns Wrong Patterns</span>!</p>
+        <div class="example-box">
+            <p class="text-gray-300 leading-9 text-lg"><strong>مثال:</strong> في داتاسيت حيوانات، 50 صورة "كلب" مُصنَّفة بالخطأ كـ"قطة". النموذج يتعلم أن بعض الكلاب = قطط ← عند الاختبار يخلط بينهم. <strong>جودة التوصيف <span class="term">Label Quality</span> تؤثر مباشرة على جودة النموذج!</strong></p>
+        </div>
+    </section>
+
+    <!-- 7. Small Dataset -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-rose-300">٧. قلة البيانات <span class="term">Small Dataset / Insufficient Data</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-5">إذا بياناتك قليلة جداً، النموذج لن يتعلم أنماطاً <span class="term">Patterns</span> كافية للتعميم <span class="term">Generalization</span>.</p>
+        <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+                <strong class="text-emerald-300 text-lg">✅ <span class="term">Data Augmentation</span></strong>
+                <p class="text-gray-400 mt-2">تعديل الصور الموجودة لإنشاء نسخ جديدة (قلب، تدوير، تكبير)</p>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+                <strong class="text-emerald-300 text-lg">✅ <span class="term">Transfer Learning</span></strong>
+                <p class="text-gray-400 mt-2">الاستفادة من نموذج مُدرَّب مسبقاً <span class="term">Pre-trained Model</span></p>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+                <strong class="text-emerald-300 text-lg">✅ جمع بيانات <span class="term">Collect More Data</span></strong>
+                <p class="text-gray-400 mt-2">من <a href="https://www.kaggle.com/datasets" target="_blank" class="text-blue-400 underline">Kaggle</a>, <a href="https://universe.roboflow.com/" target="_blank" class="text-blue-400 underline">Roboflow</a>, <a href="https://images.google.com/" target="_blank" class="text-blue-400 underline">Google Images</a></p>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+                <strong class="text-emerald-300 text-lg">✅ بيانات اصطناعية <span class="term">Synthetic Data Generation</span></strong>
+                <p class="text-gray-400 mt-2">إنشاء بيانات بالكمبيوتر باستخدام <span class="term">GANs</span> أو <span class="term">3D Rendering</span></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Summary Table -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-rose-300">📋 ملخص المشاكل والحلول <span class="term">Summary: Problems & Solutions</span></h2>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-7 overflow-x-auto">
+            <table class="w-full text-base">
+                <thead>
+                    <tr class="border-b border-white/10 text-right">
+                        <th class="p-4 text-gray-400">المشكلة <span class="term">Problem</span></th>
+                        <th class="p-4 text-gray-400">العلامة <span class="term">Symptom</span></th>
+                        <th class="p-4 text-gray-400">الحل <span class="term">Solution</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b border-white/5"><td class="p-4"><span class="term">Overfitting</span></td><td class="p-4 text-gray-400"><span class="term">Val Loss</span> يرتفع</td><td class="p-4 text-emerald-400"><span class="term">Augmentation, Early Stopping, Dropout</span></td></tr>
+                    <tr class="border-b border-white/5"><td class="p-4"><span class="term">Underfitting</span></td><td class="p-4 text-gray-400">كل <span class="term">Loss</span> عالي</td><td class="p-4 text-emerald-400">المزيد من <span class="term">Epochs</span> أو نموذج أكبر</td></tr>
+                    <tr class="border-b border-white/5"><td class="p-4"><span class="term">Imbalance</span></td><td class="p-4 text-gray-400">فئة مسيطرة</td><td class="p-4 text-emerald-400"><span class="term">Oversampling, Class Weights</span></td></tr>
+                    <tr class="border-b border-white/5"><td class="p-4"><span class="term">Bias</span></td><td class="p-4 text-gray-400">أداء سيء على بيانات مختلفة</td><td class="p-4 text-emerald-400">تنويع البيانات <span class="term">Diverse Data</span></td></tr>
+                    <tr class="border-b border-white/5"><td class="p-4"><span class="term">Data Leakage</span></td><td class="p-4 text-gray-400">نتائج مثالية لكن أداء واقعي سيء</td><td class="p-4 text-emerald-400"><span class="term">Split Before Processing</span></td></tr>
+                    <tr><td class="p-4"><span class="term">Noisy Labels</span></td><td class="p-4 text-gray-400">نتائج غير منطقية</td><td class="p-4 text-emerald-400">مراجعة التوصيف <span class="term">Label Review</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Completion -->
+    <div class="bg-gradient-to-br from-purple-500/10 via-blue-500/10 to-teal-500/10 border border-white/10 rounded-2xl p-10 text-center mb-12">
+        <div class="text-5xl mb-5">🎓</div>
+        <h2 class="text-3xl font-bold mb-4">مبروك! أكملت الدليل الشامل <span class="term">Congratulations!</span></h2>
+        <p class="text-gray-400 text-xl leading-9 max-w-2xl mx-auto">الآن تمتلك المعرفة الأساسية <span class="term">Foundational Knowledge</span> لفهم أي مشروع ذكاء اصطناعي. ارجع لأي فصل وقت ما تحتاج!</p>
+        <a href="index.html" class="inline-block mt-6 bg-purple-500/20 border border-purple-500/30 text-purple-300 px-10 py-4 rounded-xl font-bold text-lg hover:bg-purple-500/30 transition">→ العودة للصفحة الرئيسية</a>
+    </div>
+
+    <div class="flex justify-between items-center border-t border-white/10 pt-8">
+        <a href="04_evaluation.html" class="text-gray-400 hover:text-white transition text-lg">→ الفصل السابق</a>
+        <a href="index.html" class="text-purple-400 hover:text-purple-300 transition font-bold text-lg">الرئيسية ←</a>
+    </div>
+</main>
+</body>
+</html>

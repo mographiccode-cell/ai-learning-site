@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>الفصل الثالث — التدريب وإعداداته Training & Hyperparameters</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared.css">
+</head>
+<body class="bg-gray-950 text-white font-['Tajawal'] min-h-screen">
+<nav class="sticky top-0 z-50 bg-gray-950/80 backdrop-blur-xl border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-8 py-3 flex items-center justify-between">
+        <a href="02_datasets.html" class="text-gray-400 hover:text-white transition">→ الفصل السابق</a>
+        <span class="text-teal-400 font-bold">Chapter 3 — الفصل ٣ من ٥</span>
+        <a href="04_evaluation.html" class="text-teal-400 hover:text-teal-300 transition">الفصل التالي ←</a>
+    </div>
+</nav>
+<main class="max-w-7xl mx-auto px-8 py-14">
+    <div class="mb-14">
+        <div class="inline-flex items-center gap-2 bg-teal-500/10 border border-teal-500/20 rounded-full px-5 py-2 text-teal-300 mb-4">⚙️ Chapter 3 — الفصل الثالث</div>
+        <h1 class="text-4xl md:text-5xl font-black mb-5">التدريب وإعداداته <span class="term">Training & Hyperparameters</span></h1>
+        <p class="text-gray-400 text-xl leading-9">كيف يتعلم النموذج <span class="term">Model</span> من البيانات؟ وما هي الإعدادات <span class="term">Hyperparameters</span> التي تتحكم في جودة التعلم وسرعته؟</p>
+    </div>
+
+    <!-- 1. How Training Works -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-teal-300">١. كيف يتعلم النموذج؟ <span class="term">How Does Training Work?</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-5">التدريب <span class="term">Training</span> عملية تكرارية <span class="term">Iterative Process</span>: النموذج يرى البيانات ← يتوقع ← يقارن توقعه بالإجابة الصحيحة ← يعدّل نفسه ← يكرر. مع كل تكرار يتحسن قليلاً.</p>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-7 text-center mb-5">
+            <div class="flex flex-wrap justify-center items-center gap-4 text-base">
+                <span class="bg-blue-500/20 border border-blue-500/30 text-blue-300 px-5 py-3 rounded-xl font-bold">📷 يرى بيانات<br><span class="term">Input</span></span>
+                <span class="text-gray-500 text-2xl">→</span>
+                <span class="bg-purple-500/20 border border-purple-500/30 text-purple-300 px-5 py-3 rounded-xl font-bold">🤔 يتوقع<br><span class="term">Prediction</span></span>
+                <span class="text-gray-500 text-2xl">→</span>
+                <span class="bg-rose-500/20 border border-rose-500/30 text-rose-300 px-5 py-3 rounded-xl font-bold">📊 يحسب الخطأ<br><span class="term">Loss</span></span>
+                <span class="text-gray-500 text-2xl">→</span>
+                <span class="bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 px-5 py-3 rounded-xl font-bold">🔧 يعدّل الأوزان<br><span class="term">Backpropagation</span></span>
+                <span class="text-gray-500 text-2xl">→</span>
+                <span class="bg-amber-500/20 border border-amber-500/30 text-amber-300 px-5 py-3 rounded-xl font-bold">🔄 يكرر<br><span class="term">Repeat</span></span>
+            </div>
+        </div>
+        <div class="example-box">
+            <p class="text-gray-300 leading-9 text-lg"><strong>مثال:</strong> تخيل طالب يتعلم رسم الخرائط: يرسم خريطة ← المعلم يقارنها بالخريطة الأصلية ← يوضح له أين أخطأ ← الطالب يعدّل ← يرسم مرة أخرى. بعد 50 محاولة، رسمه يصبح دقيقاً جداً!</p>
+        </div>
+    </section>
+
+    <!-- 2. Epochs -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-teal-300">٢. عدد الدورات <span class="term">Epochs</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-5">الـ <span class="term">Epoch</span> يعني <strong>دورة كاملة <span class="term">Full Pass</span> على جميع بيانات التدريب</strong>. إذا عندك 5,000 صورة و <span class="term">Epochs = 100</span>، النموذج سيرى كل صورة 100 مرة.</p>
+        <div class="example-box">
+            <p class="text-gray-300 leading-9 text-lg">مثل طالب يقرأ كتاباً: المرة الأولى يفهم 20%، المرة الخامسة 60%، المرة العشرين 90%. لكن بعد المرة الـ200 لن يتحسن كثيراً — بل قد يحفظ الكلمات بدون فهم!</p>
+        </div>
+        <div class="warn-box">
+            <p class="text-gray-300 leading-9 text-lg"><strong>كثرة الـ <span class="term">Epochs</span> ليست أفضل دائماً!</strong> إذا زدتها كثيراً يحدث <span class="term">Overfitting</span> (الإفراط في التعلم) — النموذج "يحفظ" بدل ما يفهم. القيم الشائعة: 50-300 حسب حجم البيانات.</p>
+        </div>
+    </section>
+
+    <!-- 3. Batch Size -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-teal-300">٣. حجم الدفعة <span class="term">Batch Size</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-5">كم عينة <span class="term">Sample</span> يراها النموذج <strong>دفعة واحدة <span class="term">In One Step</span></strong> قبل أن يعدّل أوزانه <span class="term">Weights</span>.</p>
+        <div class="example-box">
+            <p class="text-gray-300 leading-9 text-lg"><strong>مثال:</strong> معلم يصحح أوراق الامتحان. <strong><span class="term">Batch Size = 1</span></strong>: يصحح ورقة واحدة ثم يعدّل معايير التصحيح — غير مستقر! <strong><span class="term">Batch Size = 32</span></strong>: يصحح 32 ورقة ثم يعطي ملاحظات عامة — أكثر استقراراً وسرعة.</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-4">
+            <div class="bg-white/5 border border-white/10 rounded-xl p-5 text-center">
+                <div class="text-rose-300 font-bold text-lg mb-2">Batch = 1</div>
+                <p class="text-gray-400">بطيء جداً + غير مستقر <span class="term">Noisy Gradients</span></p>
+            </div>
+            <div class="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-5 text-center">
+                <div class="text-emerald-300 font-bold text-lg mb-2">Batch = 16-64 ✓</div>
+                <p class="text-gray-400">توازن مثالي بين السرعة والاستقرار</p>
+            </div>
+            <div class="bg-amber-500/10 border border-amber-500/20 rounded-xl p-5 text-center">
+                <div class="text-amber-300 font-bold text-lg mb-2">Batch = 512+</div>
+                <p class="text-gray-400">يحتاج ذاكرة GPU كبيرة جداً</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Learning Rate -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-teal-300">٤. معدل التعلم <span class="term">Learning Rate — LR</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-5">يحدد <strong>مقدار التعديل <span class="term">Step Size</span></strong> الذي يجريه النموذج على أوزانه <span class="term">Weights</span> بعد كل خطأ. هو أهم <span class="term">Hyperparameter</span> على الإطلاق!</p>
+        <div class="example-box">
+            <p class="text-gray-300 leading-9 text-lg"><strong>مثال:</strong> تخيل أنك تبحث عن أخفض نقطة في وادي وأنت معصوب العينين. <strong><span class="term">LR</span> كبير</strong> = خطوات طويلة — تقفز فوق النقطة المطلوبة. <strong><span class="term">LR</span> صغير جداً</strong> = خطوات قصيرة — ستصل لكن بعد سنة! <strong><span class="term">LR</span> مناسب</strong> = خطوات متوسطة — تصل بكفاءة.</p>
+        </div>
+        <p class="text-gray-400 mt-3">القيم الشائعة: <span class="term">LR = 0.001</span> إلى <span class="term">0.01</span>. بعض المحسّنات <span class="term">Optimizers</span> تعدّل الـ <span class="term">LR</span> تلقائياً أثناء التدريب.</p>
+    </section>
+
+    <!-- 5. Transfer Learning -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-teal-300">٥. التعلم بالنقل <span class="term">Transfer Learning</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-5">بدلاً من تدريب النموذج <strong>من الصفر <span class="term">From Scratch</span></strong> (يحتاج ملايين الصور ووقت طويل)، نأخذ <strong>نموذج مُدرَّب مسبقاً <span class="term">Pre-trained Model</span></strong> ونعيد تدريبه على بياناتنا.</p>
+
+        <!-- Diagram -->
+        <div class="rounded-2xl overflow-hidden border border-white/10 mb-6">
+            <img src="assets/images/transfer_learning_simple.png" alt="Transfer Learning Diagram" class="w-full object-contain max-h-72">
+            <p class="text-center text-gray-500 text-sm py-3 bg-white/5">📊 مخطط توضيحي — كيف يعمل التعلم بالنقل <span class="term">Transfer Learning vs Training from Scratch</span></p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-rose-500/5 border border-rose-500/20 rounded-2xl p-6">
+                <h4 class="font-bold text-rose-300 text-lg mb-3">❌ من الصفر <span class="term">Training From Scratch</span></h4>
+                <ul class="text-gray-300 leading-9 space-y-2">
+                    <li>• يحتاج <strong>ملايين</strong> الصور</li>
+                    <li>• تدريب <strong>أيام أو أسابيع</strong></li>
+                    <li>• يحتاج <span class="term">GPU</span> قوي ومكلف</li>
+                    <li>• نتائج ضعيفة مع بيانات قليلة</li>
+                </ul>
+            </div>
+            <div class="bg-emerald-500/5 border border-emerald-500/20 rounded-2xl p-6">
+                <h4 class="font-bold text-emerald-300 text-lg mb-3">✅ التعلم بالنقل <span class="term">Transfer Learning</span></h4>
+                <ul class="text-gray-300 leading-9 space-y-2">
+                    <li>• يكفي <strong>آلاف</strong> الصور فقط</li>
+                    <li>• تدريب <strong>دقائق أو ساعات</strong></li>
+                    <li>• يعمل على <span class="term">GPU</span> مجاني (Colab)</li>
+                    <li>• نتائج ممتازة مع بيانات قليلة</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="example-box">
+            <p class="text-gray-300 leading-9 text-lg"><strong>مثال:</strong> طبيب عام درس الطب 7 سنوات (= نموذج مُدرَّب على ImageNet). الآن يريد التخصص في طب العيون — لا يحتاج 7 سنوات أخرى، فقط سنتين إضافيتين لأنه يملك أساساً قوياً. هذا بالضبط <span class="term">Transfer Learning</span>!</p>
+        </div>
+
+        <div class="key-box">
+            <p class="text-gray-300 leading-9 text-lg"><strong>لماذا لا نبدأ من الصفر؟</strong> لأن الطبقات الأولى <span class="term">Early Layers</span> في أي شبكة عصبية تتعلم أشياء عامة (خطوط، زوايا، ألوان) — وهي نفسها تقريباً في كل مهمة. فقط الطبقات الأخيرة <span class="term">Final Layers</span> تحتاج تخصيص لمهمتك.</p>
+        </div>
+    </section>
+
+    <!-- 6. Fine-tuning -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-teal-300">٦. الضبط الدقيق <span class="term">Fine-tuning</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-5"><span class="term">Fine-tuning</span> هو إعادة تدريب <strong>جميع طبقات <span class="term">All Layers</span></strong> أو معظم طبقات النموذج المُدرَّب مسبقاً على بياناتك الخاصة، مع <span class="term">Learning Rate</span> صغير حتى لا يفقد ما تعلمه سابقاً.</p>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-7">
+            <h4 class="font-bold text-lg mb-4">الفرق <span class="term">Transfer Learning vs Fine-tuning</span>:</h4>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-blue-500/5 border border-blue-500/20 rounded-xl p-5">
+                    <strong class="text-blue-300 text-lg">Transfer Learning</strong>
+                    <p class="text-gray-300 leading-8 mt-2">نُجمّد <span class="term">Freeze</span> معظم الطبقات ونغير الطبقة الأخيرة فقط. أسرع لكن أقل دقة.</p>
+                </div>
+                <div class="bg-teal-500/5 border border-teal-500/20 rounded-xl p-5">
+                    <strong class="text-teal-300 text-lg">Fine-tuning</strong>
+                    <p class="text-gray-300 leading-8 mt-2">نُفتح <span class="term">Unfreeze</span> جميع الطبقات ونعيد تدريبها. أبطأ لكن أدق.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Data Augmentation -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-teal-300">٧. تضخيم البيانات <span class="term">Data Augmentation</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-5">إذا بياناتك قليلة، يمكنك <strong>"تصنيع" بيانات إضافية <span class="term">Generate More Data</span></strong> عن طريق تعديل الصور الموجودة بطرق مختلفة:</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-5">
+            <div class="bg-white/5 border border-white/10 rounded-xl p-5 text-center">
+                <div class="text-3xl mb-2">🔄</div>
+                <div class="font-bold">القلب <span class="term">Flip</span></div>
+                <p class="text-gray-400 text-sm mt-1">قلب أفقي أو عمودي</p>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-5 text-center">
+                <div class="text-3xl mb-2">🔍</div>
+                <div class="font-bold">التكبير <span class="term">Zoom / Scale</span></div>
+                <p class="text-gray-400 text-sm mt-1">تقريب أو تبعيد</p>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-5 text-center">
+                <div class="text-3xl mb-2">🎨</div>
+                <div class="font-bold">الألوان <span class="term">HSV / Brightness</span></div>
+                <p class="text-gray-400 text-sm mt-1">تعديل الإضاءة والتشبع</p>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-5 text-center">
+                <div class="text-3xl mb-2">📐</div>
+                <div class="font-bold">التدوير <span class="term">Rotation</span></div>
+                <p class="text-gray-400 text-sm mt-1">تدوير بزاوية عشوائية</p>
+            </div>
+        </div>
+        <div class="example-box">
+            <p class="text-gray-300 leading-9 text-lg">عندك 500 صورة فقط. بعد <span class="term">Augmentation</span>: كل صورة تولّد 5 نسخ معدّلة (مقلوبة، مكبّرة، مُعتمة...) = 3,000 صورة! النموذج يرى تنوعاً أكبر ويتعلم أفضل.</p>
+        </div>
+
+        <div class="link-box">
+            <p class="text-gray-300 leading-8">📖 <a href="https://docs.ultralytics.com/guides/hyperparameter-tuning/" target="_blank">دليل ضبط الـ Hyperparameters من Ultralytics</a></p>
+            <p class="text-gray-300 leading-8">🧪 <a href="https://colab.research.google.com/" target="_blank">Google Colab — بيئة تدريب مجانية مع GPU</a></p>
+            <p class="text-gray-300 leading-8">💻 <a href="https://www.kaggle.com/code" target="_blank">Kaggle Notebooks — بيئة تدريب بديلة مع GPU P100</a></p>
+            <p class="text-gray-300 leading-8">📊 <a href="https://albumentations.ai/" target="_blank">Albumentations — مكتبة Data Augmentation الأشهر</a></p>
+        </div>
+    </section>
+
+    <div class="flex justify-between items-center border-t border-white/10 pt-8">
+        <a href="02_datasets.html" class="text-gray-400 hover:text-white transition text-lg">→ الفصل السابق</a>
+        <a href="04_evaluation.html" class="bg-amber-500/10 border border-amber-500/30 text-amber-300 px-8 py-4 rounded-xl font-bold hover:bg-amber-500/20 transition text-lg">الفصل التالي: التقييم والمقاييس ←</a>
+    </div>
+</main>
+</body>
+</html>

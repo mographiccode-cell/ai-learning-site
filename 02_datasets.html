@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>الفصل الثاني — البيانات والداتاسيت Datasets</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared.css">
+</head>
+<body class="bg-gray-950 text-white font-['Tajawal'] min-h-screen">
+<nav class="sticky top-0 z-50 bg-gray-950/80 backdrop-blur-xl border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-8 py-3 flex items-center justify-between">
+        <a href="01_ai_intro.html" class="text-gray-400 hover:text-white transition">→ الفصل السابق</a>
+        <span class="text-blue-400 font-bold">Chapter 2 — الفصل ٢ من ٥</span>
+        <a href="03_training.html" class="text-blue-400 hover:text-blue-300 transition">الفصل التالي ←</a>
+    </div>
+</nav>
+<main class="max-w-7xl mx-auto px-8 py-14">
+    <div class="mb-14">
+        <div class="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 rounded-full px-5 py-2 text-blue-300 mb-4">📊 Chapter 2 — الفصل الثاني</div>
+        <h1 class="text-4xl md:text-5xl font-black mb-5">البيانات والداتاسيت <span class="term">Datasets & Data Preparation</span></h1>
+        <p class="text-gray-400 text-xl leading-9">البيانات <span class="term">Data</span> هي الوقود الذي يعمل عليه الذكاء الاصطناعي. بدون بيانات جيدة، لا يمكن بناء نموذج جيد — مهما كانت الخوارزمية ذكية.</p>
+    </div>
+
+    <!-- 1. What is Dataset -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-blue-300">١. ما هي الداتاسيت؟ <span class="term">What is a Dataset?</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-5">الداتاسيت هي <strong>مجموعة منظمة من البيانات <span class="term">Organized Collection of Data</span></strong> تُستخدم لتدريب <span class="term">Training</span> واختبار <span class="term">Testing</span> نموذج الذكاء الاصطناعي.</p>
+        <div class="example-box">
+            <p class="text-gray-300 leading-9 text-lg"><strong>مثال:</strong> داتاسيت <strong>ImageNet</strong> تحتوي على <strong>14 مليون صورة</strong> مصنفة في 20,000 فئة — وهي من أشهر الداتاسيت في العالم وتُستخدم لتدريب نماذج التصنيف. أما داتاسيت <strong>COCO</strong> فتحتوي على 330,000 صورة مع توصيف لكشف الأجسام <span class="term">Object Detection</span>.</p>
+        </div>
+    </section>
+
+    <!-- 2. Types of Data -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-blue-300">٢. أنواع البيانات <span class="term">Types of Data</span></h2>
+        <div class="grid md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+                <h4 class="font-bold text-lg mb-3">🖼️ بيانات الصور <span class="term">Image Data</span></h4>
+                <p class="text-gray-300 leading-8 mb-3">صور بصيغ مثل <span class="term">JPG, PNG, BMP</span>. تُستخدم في تصنيف الصور <span class="term">Classification</span> وكشف الأجسام <span class="term">Detection</span> والتقسيم <span class="term">Segmentation</span>.</p>
+                <div class="example-box"><p class="text-gray-300 leading-8">صور الأشعة الطبية لتشخيص الأمراض، صور الأقمار الصناعية لتحليل الأراضي، صور كاميرات المراقبة للأمن.</p></div>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+                <h4 class="font-bold text-lg mb-3">📝 بيانات نصية <span class="term">Text Data / NLP Data</span></h4>
+                <p class="text-gray-300 leading-8 mb-3">نصوص مثل مقالات، تعليقات، محادثات. تُستخدم في تحليل المشاعر <span class="term">Sentiment Analysis</span> والترجمة <span class="term">Translation</span>.</p>
+                <div class="example-box"><p class="text-gray-300 leading-8">تعليقات أمازون لتحديد "إيجابي/سلبي"، رسائل بريد لتصنيفها "سبام/عادي".</p></div>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+                <h4 class="font-bold text-lg mb-3">🔢 بيانات جدولية <span class="term">Tabular / Structured Data</span></h4>
+                <p class="text-gray-300 leading-8 mb-3">جداول مثل Excel بأعمدة وصفوف. تُستخدم في التنبؤ <span class="term">Prediction</span> والانحدار <span class="term">Regression</span>.</p>
+                <div class="example-box"><p class="text-gray-300 leading-8">بيانات أسعار المنازل (مساحة، موقع، عدد غرف) للتنبؤ بالسعر.</p></div>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+                <h4 class="font-bold text-lg mb-3">🎵 بيانات صوتية ومرئية <span class="term">Audio & Video Data</span></h4>
+                <p class="text-gray-300 leading-8 mb-3">ملفات صوت <span class="term">WAV, MP3</span> وفيديو <span class="term">MP4</span>. تُستخدم في التعرف على الكلام <span class="term">Speech Recognition</span>.</p>
+                <div class="example-box"><p class="text-gray-300 leading-8">Siri يحول كلامك لنص، YouTube يولّد ترجمة تلقائية للفيديوهات.</p></div>
+            </div>
+        </div>
+
+        <div class="link-box">
+            <p class="text-gray-300 leading-8">📊 <a href="https://www.kaggle.com/datasets" target="_blank">Kaggle Datasets — أكبر منصة داتاسيت مجانية (صور، نصوص، جداول)</a></p>
+            <p class="text-gray-300 leading-8">🖼️ <a href="https://universe.roboflow.com/" target="_blank">Roboflow Universe — داتاسيت صور جاهزة لكشف الأجسام</a></p>
+            <p class="text-gray-300 leading-8">🏷️ <a href="https://datasetsearch.research.google.com/" target="_blank">Google Dataset Search — محرك بحث داتاسيت من Google</a></p>
+            <p class="text-gray-300 leading-8">🤗 <a href="https://huggingface.co/datasets" target="_blank">Hugging Face Datasets — داتاسيت نصية ولغوية ضخمة</a></p>
+            <p class="text-gray-300 leading-8">🔬 <a href="https://cocodataset.org/" target="_blank">COCO Dataset — داتاسيت كشف الأجسام الأشهر عالمياً</a></p>
+            <p class="text-gray-300 leading-8">📸 <a href="https://www.image-net.org/" target="_blank">ImageNet — 14 مليون صورة مصنفة</a></p>
+        </div>
+    </section>
+
+    <!-- 3. Annotation -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-blue-300">٣. التوصيف / التسمية <span class="term">Data Annotation / Labeling</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-5">التوصيف هو عملية <strong>وضع علامات <span class="term">Labels</span> على البيانات</strong> لتعليم النموذج "الإجابة الصحيحة" <span class="term">Ground Truth</span>. بدون توصيف، النموذج لا يعرف ماذا يتعلم!</p>
+
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-7 mb-5">
+            <h4 class="font-bold text-lg mb-4">أنواع التوصيف للصور <span class="term">Image Annotation Types</span>:</h4>
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="bg-amber-500/5 border border-amber-500/20 rounded-xl p-5 text-center">
+                    <div class="text-4xl mb-3">🏷️</div>
+                    <strong class="text-amber-300">تسمية الصورة <span class="term">Image-level Label</span></strong>
+                    <p class="text-gray-400 mt-2">الصورة كلها = تسمية واحدة. <br>مثال: "قطة" أو "كلب"</p>
+                </div>
+                <div class="bg-rose-500/5 border border-rose-500/20 rounded-xl p-5 text-center">
+                    <div class="text-4xl mb-3">📦</div>
+                    <strong class="text-rose-300">رسم مربع <span class="term">Bounding Box</span></strong>
+                    <p class="text-gray-400 mt-2">مستطيل حول كل كائن مع اسمه. <br>الأكثر استخداماً في كشف الأجسام.</p>
+                </div>
+                <div class="bg-teal-500/5 border border-teal-500/20 rounded-xl p-5 text-center">
+                    <div class="text-4xl mb-3">🧩</div>
+                    <strong class="text-teal-300">تقسيم البكسلات <span class="term">Segmentation Mask</span></strong>
+                    <p class="text-gray-400 mt-2">تحديد كل بكسل ينتمي لأي كائن. <br>الأدق لكن الأصعب.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="example-box">
+            <p class="text-gray-300 leading-9 text-lg"><strong>مثال عملي:</strong> في مشروع كشف الحيوانات، تفتح صورة غابة ← ترسم مربعاً حول كل حيوان ← تكتب اسمه (أسد، فيل، زرافة). هذا الملف المُوصَّف <span class="term">Annotated File</span> يصبح "الإجابة الصحيحة" التي يتعلم منها النموذج.</p>
+        </div>
+
+        <div class="link-box">
+            <p class="text-gray-300 leading-8">🏷️ <a href="https://www.cvat.ai/" target="_blank">CVAT — أداة توصيف مجانية ومفتوحة المصدر</a></p>
+            <p class="text-gray-300 leading-8">🎯 <a href="https://www.makesense.ai/" target="_blank">MakeSense.ai — توصيف صور في المتصفح مباشرة (مجاني)</a></p>
+            <p class="text-gray-300 leading-8">🔧 <a href="https://roboflow.com/annotate" target="_blank">Roboflow Annotate — أداة توصيف متقدمة مع تصدير بتنسيقات متعددة</a></p>
+        </div>
+    </section>
+
+    <!-- 4. Data Splitting -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-blue-300">٤. تقسيم البيانات <span class="term">Data Splitting (Train / Validation / Test)</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-5">لا يمكنك استخدام نفس البيانات للتدريب والاختبار — مثل الطالب الذي يحفظ أسئلة الامتحان مسبقاً: درجته عالية لكنه لا يفهم فعلاً. لذلك نقسم البيانات لـ <strong>ثلاث مجموعات <span class="term">Three Splits</span></strong>:</p>
+
+        <!-- Diagram -->
+        <div class="rounded-2xl overflow-hidden border border-white/10 mb-6">
+            <img src="assets/images/data_split_simple.png" alt="Data Split Diagram Train Val Test" class="w-full object-contain max-h-72">
+            <p class="text-center text-gray-500 text-sm py-3 bg-white/5">📊 مخطط توضيحي — تقسيم البيانات إلى ثلاث مجموعات <span class="term">Train / Validation / Test Split</span></p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-5 mb-5">
+            <div class="bg-emerald-500/5 border border-emerald-500/20 rounded-2xl p-7 text-center">
+                <div class="text-4xl mb-3">📗</div>
+                <h4 class="font-bold text-emerald-300 text-xl mb-2">مجموعة التدريب <span class="term">Training Set</span></h4>
+                <div class="text-4xl font-black text-emerald-400 mb-3">70-80%</div>
+                <p class="text-gray-300 leading-8">يتعلم منها النموذج <span class="term">Model</span> الأنماط <span class="term">Patterns</span>.</p>
+                <div class="example-box"><p class="text-gray-300 leading-8">مثل الكتاب المدرسي — يذاكر منه الطالب ويتعلم.</p></div>
+            </div>
+            <div class="bg-amber-500/5 border border-amber-500/20 rounded-2xl p-7 text-center">
+                <div class="text-4xl mb-3">📙</div>
+                <h4 class="font-bold text-amber-300 text-xl mb-2">مجموعة التحقق <span class="term">Validation Set</span></h4>
+                <div class="text-4xl font-black text-amber-400 mb-3">10-15%</div>
+                <p class="text-gray-300 leading-8">يُختبر أثناء التدريب لمراقبة الأداء <span class="term">Monitor Performance</span>.</p>
+                <div class="example-box"><p class="text-gray-300 leading-8">مثل الواجبات المنزلية — يحل ويراجع نفسه.</p></div>
+            </div>
+            <div class="bg-rose-500/5 border border-rose-500/20 rounded-2xl p-7 text-center">
+                <div class="text-4xl mb-3">📕</div>
+                <h4 class="font-bold text-rose-300 text-xl mb-2">مجموعة الاختبار <span class="term">Test Set</span></h4>
+                <div class="text-4xl font-black text-rose-400 mb-3">10-15%</div>
+                <p class="text-gray-300 leading-8">اختبار نهائي <strong>بعد</strong> انتهاء التدريب تماماً.</p>
+                <div class="example-box"><p class="text-gray-300 leading-8">مثل الاختبار النهائي — لم يره من قبل أبداً.</p></div>
+            </div>
+        </div>
+
+        <div class="warn-box">
+            <p class="text-gray-300 leading-9 text-lg"><strong>قاعدة ذهبية <span class="term">Golden Rule</span>:</strong> بيانات الاختبار <span class="term">Test Set</span> لا يراها النموذج أبداً أثناء التدريب. إذا رآها، فالنتائج مزيفة — وهذا يسمى <span class="term">Data Leakage</span> (تسريب البيانات)!</p>
+        </div>
+    </section>
+
+    <!-- 5. EDA -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-blue-300">٥. تحليل البيانات الاستكشافي <span class="term">Exploratory Data Analysis — EDA</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-5">قبل التدريب، يجب أن <strong>تفحص بياناتك جيداً <span class="term">Inspect Your Data</span></strong>. تحليل البيانات يكشف المشاكل مبكراً قبل أن تضيع وقت التدريب.</p>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-7">
+            <h4 class="font-bold text-lg mb-4">أسئلة أساسية عن بياناتك <span class="term">Key Questions</span>:</h4>
+            <div class="space-y-4 text-gray-300 text-lg leading-9">
+                <p>✅ <strong>كم حجم الداتاسيت <span class="term">Dataset Size</span>؟</strong> — هل العدد كافٍ للتدريب؟ (عادة 1,000+ صورة كحد أدنى)</p>
+                <p>✅ <strong>هل الفئات متوازنة <span class="term">Class Balance</span>؟</strong> — هل كل فئة لها عدد صور متقارب؟</p>
+                <p>✅ <strong>ما جودة البيانات <span class="term">Data Quality</span>؟</strong> — هل فيها صور ضبابية أو تالفة أو مكررة؟</p>
+                <p>✅ <strong>هل التوصيف صحيح <span class="term">Label Accuracy</span>؟</strong> — هل المربعات مرسومة بدقة على الكائنات؟</p>
+                <p>✅ <strong>ما تنوع البيانات <span class="term">Data Diversity</span>؟</strong> — هل تغطي ظروف مختلفة (إضاءة، زوايا، خلفيات)؟</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. data.yaml -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-blue-300">٦. ملف إعداد البيانات <span class="term">Dataset Configuration File — data.yaml</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-5">في نماذج YOLO، هذا الملف يخبر النموذج <strong>أين توجد البيانات <span class="term">Data Paths</span> وما هي الفئات <span class="term">Class Names</span></strong>.</p>
+        <div class="bg-gray-900 border border-white/10 rounded-xl p-6 font-mono text-base leading-9 text-gray-300 mb-4" dir="ltr">
+            <span class="text-green-400"># مسارات البيانات Data Paths</span><br>
+            <span class="text-purple-400">train:</span> ../train/images<br>
+            <span class="text-purple-400">val:</span> ../valid/images<br>
+            <span class="text-purple-400">test:</span> ../test/images<br><br>
+            <span class="text-green-400"># عدد الفئات Number of Classes</span><br>
+            <span class="text-purple-400">nc:</span> 3<br><br>
+            <span class="text-green-400"># أسماء الفئات Class Names</span><br>
+            <span class="text-purple-400">names:</span> ['cat', 'dog', 'bird']
+        </div>
+        <p class="text-gray-400 leading-8">ملاحظة: <span class="term">nc</span> = عدد الفئات <span class="term">Number of Classes</span>. يجب أن يتطابق مع عدد الأسماء في <span class="term">names</span>.</p>
+    </section>
+
+    <div class="flex justify-between items-center border-t border-white/10 pt-8">
+        <a href="01_ai_intro.html" class="text-gray-400 hover:text-white transition text-lg">→ الفصل السابق</a>
+        <a href="03_training.html" class="bg-teal-500/10 border border-teal-500/30 text-teal-300 px-8 py-4 rounded-xl font-bold hover:bg-teal-500/20 transition text-lg">الفصل التالي: التدريب وإعداداته ←</a>
+    </div>
+</main>
+</body>
+</html>

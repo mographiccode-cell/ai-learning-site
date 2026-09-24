@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>الفصل الأول — ما هو الذكاء الاصطناعي؟ What is AI?</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared.css">
+</head>
+<body class="bg-gray-950 text-white font-['Tajawal'] min-h-screen">
+<nav class="sticky top-0 z-50 bg-gray-950/80 backdrop-blur-xl border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-8 py-3 flex items-center justify-between">
+        <a href="index.html" class="text-gray-400 hover:text-white transition">→ الرئيسية</a>
+        <span class="text-purple-400 font-bold">Chapter 1 — الفصل ١ من ٥</span>
+        <a href="02_datasets.html" class="text-purple-400 hover:text-purple-300 transition">الفصل التالي ←</a>
+    </div>
+</nav>
+<main class="max-w-7xl mx-auto px-8 py-14">
+
+    <div class="mb-14">
+        <div class="inline-flex items-center gap-2 bg-purple-500/10 border border-purple-500/20 rounded-full px-5 py-2 text-purple-300 mb-4">🧠 Chapter 1 — الفصل الأول</div>
+        <h1 class="text-4xl md:text-5xl font-black mb-5">ما هو الذكاء الاصطناعي؟ <span class="term">What is Artificial Intelligence?</span></h1>
+        <p class="text-gray-400 text-xl leading-9">تعرّف على مفهوم الذكاء الاصطناعي <span class="term">AI</span> وأنواعه الرئيسية مع أمثلة واقعية من حياتك اليومية ومن مشاريع حقيقية حول العالم.</p>
+    </div>
+
+    <!-- 1. What is AI -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-purple-300">١. تعريف الذكاء الاصطناعي <span class="term">Artificial Intelligence — AI</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-5">الذكاء الاصطناعي هو <strong>علم تعليم الكمبيوتر كيف يفكر ويتخذ قرارات بنفسه</strong> بدلاً من أن يُبرمَج لكل حالة يدوياً. الفكرة الأساسية: بدلاً من كتابة تعليمات صارمة، <strong>تعطيه أمثلة كثيرة ويستخرج القواعد بنفسه</strong>.</p>
+
+        <div class="grid md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-rose-500/5 border border-rose-500/20 rounded-2xl p-6">
+                <h4 class="font-bold text-rose-300 text-lg mb-3">❌ البرمجة التقليدية <span class="term">Traditional Programming</span></h4>
+                <p class="text-gray-300 leading-8">أنت تكتب القواعد يدوياً:</p>
+                <div class="bg-gray-900 rounded-xl p-4 mt-3 font-mono text-sm" dir="ltr">
+                    <span class="text-green-400">if</span> shape == "round" <span class="text-green-400">and</span> color == "red":<br>
+                    &nbsp;&nbsp;result = "تفاحة 🍎"<br>
+                    <span class="text-gray-500"># لكن ماذا لو كانت خضراء؟ أو صفراء؟</span>
+                </div>
+                <p class="text-gray-400 text-base mt-3">المشكلة: تحتاج كتابة قاعدة لكل حالة ممكنة — وهذا مستحيل في العالم الحقيقي!</p>
+            </div>
+            <div class="bg-emerald-500/5 border border-emerald-500/20 rounded-2xl p-6">
+                <h4 class="font-bold text-emerald-300 text-lg mb-3">✅ الذكاء الاصطناعي <span class="term">AI / Machine Learning</span></h4>
+                <p class="text-gray-300 leading-8">تعطيه بيانات <span class="term">Data</span> ويتعلم بنفسه:</p>
+                <div class="bg-gray-900 rounded-xl p-4 mt-3 font-mono text-sm" dir="ltr">
+                    <span class="text-green-400"># أعطيه 10,000 صورة تفاح متنوعة</span><br>
+                    model.train(images, labels)<br>
+                    <span class="text-green-400"># الآن يتعرف على أي تفاحة!</span>
+                </div>
+                <p class="text-gray-400 text-base mt-3">الحل: يتعلم الأنماط من الأمثلة ويعمّم على حالات جديدة لم يرها من قبل.</p>
+            </div>
+        </div>
+
+        <div class="example-box">
+            <p class="text-gray-300 leading-9 text-lg"><strong>مثال من الحياة:</strong> كيف تعلمت أنت التفريق بين القطة والكلب؟ لم يعطك أحد قواعد رياضية — بل رأيت مئات القطط والكلاب في حياتك، وعقلك استخرج الأنماط تلقائياً (شكل الأذن، حجم الأنف، طريقة المشي). <strong>الذكاء الاصطناعي يفعل نفس الشيء بالضبط!</strong></p>
+        </div>
+    </section>
+
+    <!-- 2. AI Tree -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-purple-300">٢. شجرة الذكاء الاصطناعي <span class="term">AI Hierarchy</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-6">الذكاء الاصطناعي مظلة كبيرة تحتها عدة فروع متداخلة. كل فرع أكثر تخصصاً من الذي فوقه:</p>
+
+        <!-- Diagram -->
+        <div class="rounded-2xl overflow-hidden border border-white/10 mb-6">
+            <img src="assets/images/ai_ml_dl_simple.png" alt="AI ML DL Hierarchy Diagram" class="w-full object-contain max-h-80">
+            <p class="text-center text-gray-500 text-sm py-3 bg-white/5">📊 مخطط توضيحي — العلاقة بين الذكاء الاصطناعي وتعلم الآلة والتعلم العميق <span class="term">AI → ML → DL Hierarchy</span></p>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-8 mb-6 text-center">
+            <div class="inline-block bg-purple-500/20 border border-purple-500/30 rounded-xl px-8 py-4 text-purple-300 font-bold text-lg mb-4">🧠 الذكاء الاصطناعي <span class="term">AI</span></div>
+            <div class="text-gray-500 text-3xl mb-4">↓</div>
+            <div class="inline-block bg-blue-500/20 border border-blue-500/30 rounded-xl px-8 py-4 text-blue-300 font-bold text-lg mb-4">📚 تعلّم الآلة <span class="term">Machine Learning</span></div>
+            <div class="text-gray-500 text-3xl mb-4">↓</div>
+            <div class="inline-block bg-teal-500/20 border border-teal-500/30 rounded-xl px-8 py-4 text-teal-300 font-bold text-lg mb-4">🔬 التعلّم العميق <span class="term">Deep Learning</span></div>
+            <div class="text-gray-500 text-3xl mb-4">↓</div>
+            <div class="flex flex-wrap justify-center gap-4">
+                <div class="bg-amber-500/20 border border-amber-500/30 rounded-xl px-5 py-3 text-amber-300 font-bold">تصنيف الصور <span class="term">Classification</span></div>
+                <div class="bg-rose-500/20 border border-rose-500/30 rounded-xl px-5 py-3 text-rose-300 font-bold">كشف الأجسام <span class="term">Object Detection</span></div>
+                <div class="bg-green-500/20 border border-green-500/30 rounded-xl px-5 py-3 text-green-300 font-bold">معالجة اللغة <span class="term">NLP</span></div>
+                <div class="bg-cyan-500/20 border border-cyan-500/30 rounded-xl px-5 py-3 text-cyan-300 font-bold">توليد الصور <span class="term">Image Generation</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Machine Learning -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-purple-300">٣. تعلّم الآلة <span class="term">Machine Learning — ML</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-6">هو الفرع الأهم من الذكاء الاصطناعي. الفكرة: <strong>الكمبيوتر يتعلم من البيانات <span class="term">Data</span> بدون برمجته مباشرة</strong>. تعطيه أمثلة ← يستخرج الأنماط <span class="term">Patterns</span> ← يتنبأ بحالات جديدة.</p>
+
+        <h3 class="text-2xl font-bold mb-5 text-gray-200">أنواع تعلّم الآلة <span class="term">Types of Machine Learning</span>:</h3>
+        <div class="grid md:grid-cols-3 gap-5 mb-6">
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+                <div class="text-3xl mb-3">📖</div>
+                <h4 class="font-bold text-lg mb-3">تعلّم بإشراف <span class="term">Supervised Learning</span></h4>
+                <p class="text-gray-300 leading-8 mb-3">تعطي النموذج <span class="term">Model</span> بيانات <strong>مع الإجابة الصحيحة <span class="term">Labels</span></strong>. يتعلم العلاقة بين المدخل والمخرج.</p>
+                <div class="example-box">
+                    <p class="text-gray-300 leading-8"><strong>مثال:</strong> تعطي نظاماً طبياً آلاف صور الأشعة مع تشخيص الطبيب (ورم / سليم). يتعلم التفريق بنفسه ويشخّص صور جديدة.</p>
+                </div>
+                <p class="text-purple-400 text-sm mt-2">📌 هذا النوع الأكثر استخداماً — ومعظم مشاريع الكشف والتصنيف تستخدمه.</p>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+                <div class="text-3xl mb-3">🔍</div>
+                <h4 class="font-bold text-lg mb-3">تعلّم بدون إشراف <span class="term">Unsupervised Learning</span></h4>
+                <p class="text-gray-300 leading-8 mb-3">تعطيه بيانات <strong>بدون إجابات</strong>. يكتشف الأنماط والتجمعات <span class="term">Clusters</span> بنفسه.</p>
+                <div class="example-box">
+                    <p class="text-gray-300 leading-8"><strong>مثال:</strong> متجر إلكتروني يعطي النظام بيانات شراء ملايين العملاء. النظام يجمّعهم تلقائياً: "عملاء يحبون الرياضة"، "عملاء يحبون التقنية".</p>
+                </div>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+                <div class="text-3xl mb-3">🎮</div>
+                <h4 class="font-bold text-lg mb-3">تعلّم معزّز <span class="term">Reinforcement Learning — RL</span></h4>
+                <p class="text-gray-300 leading-8 mb-3">يتعلم بـ<strong>المحاولة والخطأ <span class="term">Trial & Error</span></strong>. يحصل على مكافأة <span class="term">Reward</span> عند النجاح وعقوبة <span class="term">Penalty</span> عند الفشل.</p>
+                <div class="example-box">
+                    <p class="text-gray-300 leading-8"><strong>مثال:</strong> نظام AlphaGo من Google تعلّم لعبة Go بلعب ملايين المباريات ضد نفسه — وهزم بطل العالم!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Deep Learning -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-purple-300">٤. التعلّم العميق <span class="term">Deep Learning — DL</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-5">فرع متقدم من تعلّم الآلة يستخدم <strong>شبكات عصبية اصطناعية <span class="term">Artificial Neural Networks</span></strong> مستوحاة من الدماغ البشري. تتكون من <strong>طبقات متعددة <span class="term">Layers</span></strong> (لذلك اسمه "عميق" — أي طبقات عميقة).</p>
+
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-7 mb-5">
+            <h4 class="font-bold text-lg mb-4">كيف تعمل الشبكة العصبية <span class="term">Neural Network</span>؟</h4>
+            <div class="flex flex-wrap justify-center items-center gap-3 text-base mb-4">
+                <span class="bg-blue-500/20 border border-blue-500/30 text-blue-300 px-5 py-3 rounded-xl font-bold">📷 طبقة الإدخال<br><span class="term">Input Layer</span></span>
+                <span class="text-gray-500 text-2xl">→</span>
+                <span class="bg-purple-500/20 border border-purple-500/30 text-purple-300 px-5 py-3 rounded-xl font-bold">🔮 طبقات مخفية<br><span class="term">Hidden Layers</span></span>
+                <span class="text-gray-500 text-2xl">→</span>
+                <span class="bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 px-5 py-3 rounded-xl font-bold">🎯 طبقة المخرج<br><span class="term">Output Layer</span></span>
+            </div>
+            <div class="example-box">
+                <p class="text-gray-300 leading-9 text-lg"><strong>مثال تخيّلي:</strong> تخيل أنك تنظر لصورة سيارة. عينك (طبقة الإدخال) ترى البكسلات ← الطبقة الأولى في دماغك تلاحظ الخطوط والزوايا ← الطبقة الثانية تتعرف على الأشكال (دائرة = إطار) ← الطبقة الثالثة تجمع كل شيء وتقول: "سيارة!" — هذا بالضبط ما تفعله الشبكة العصبية.</p>
+            </div>
+        </div>
+
+        <div class="link-box">
+            <p class="text-gray-300 leading-8">🎥 <a href="https://www.youtube.com/watch?v=aircAruvnKk" target="_blank">شرح مرئي رائع للشبكات العصبية — 3Blue1Brown (إنجليزي)</a></p>
+            <p class="text-gray-300 leading-8">📖 <a href="https://www.tensorflow.org/learn" target="_blank">دورة TensorFlow المجانية من Google</a></p>
+        </div>
+    </section>
+
+    <!-- 5. Object Detection vs Classification -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-purple-300">٥. التصنيف مقابل كشف الأجسام <span class="term">Classification vs Object Detection</span></h2>
+        <div class="grid md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+                <h4 class="font-bold text-amber-300 text-lg mb-3">🏷️ تصنيف الصور <span class="term">Image Classification</span></h4>
+                <p class="text-gray-300 leading-8 mb-3">يجيب على سؤال واحد: <strong>"ماذا يوجد في هذه الصورة؟"</strong></p>
+                <p class="text-gray-400 mb-3">المخرج <span class="term">Output</span>: تسمية واحدة للصورة كلها</p>
+                <div class="bg-gray-900 rounded-xl p-4 text-center">
+                    <div class="text-4xl mb-2">🐱</div>
+                    <div class="text-amber-300 font-bold">→ "قطة" (95% ثقة)</div>
+                </div>
+                <div class="example-box">
+                    <p class="text-gray-300 leading-8">تطبيق Google Lens: تصوّر نبتة ← يقول لك "وردة جورية".</p>
+                </div>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+                <h4 class="font-bold text-rose-300 text-lg mb-3">📍 كشف الأجسام <span class="term">Object Detection</span></h4>
+                <p class="text-gray-300 leading-8 mb-3">يجيب على: <strong>"ماذا يوجد وأين بالضبط في الصورة؟"</strong></p>
+                <p class="text-gray-400 mb-3">المخرج <span class="term">Output</span>: عدة مربعات <span class="term">Bounding Boxes</span> + تسميات</p>
+                <div class="bg-gray-900 rounded-xl p-4 text-center">
+                    <div class="text-4xl mb-2">🚗👤🚦</div>
+                    <div class="text-rose-300 font-bold">→ سيارة (هنا) + شخص (هنا) + إشارة (هنا)</div>
+                </div>
+                <div class="example-box">
+                    <p class="text-gray-300 leading-8">نظام السيارة ذاتية القيادة: يحدد كل شيء في الطريق ومكانه بالضبط في نفس اللحظة.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. YOLO -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-purple-300">٦. ما هو YOLO؟ <span class="term">You Only Look Once</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-5">YOLO هو أحد أشهر نماذج كشف الأجسام <span class="term">Object Detection Models</span>. الاسم يعني <strong>"تنظر مرة واحدة فقط"</strong> — النموذج يحلل الصورة كاملة <strong>في مرور واحد</strong> بدلاً من فحص كل جزء على حدة، مما يجعله <strong>سريعاً جداً <span class="term">Real-time</span></strong>.</p>
+
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6 mb-5">
+            <h4 class="font-bold text-lg mb-4">إصدارات YOLO عبر السنوات <span class="term">YOLO Versions</span>:</h4>
+            <div class="flex flex-wrap gap-3">
+                <span class="bg-gray-800 px-4 py-2 rounded-lg text-gray-400">YOLOv1 <span class="text-gray-600">(2015)</span></span>
+                <span class="bg-gray-800 px-4 py-2 rounded-lg text-gray-400">YOLOv3 <span class="text-gray-600">(2018)</span></span>
+                <span class="bg-gray-800 px-4 py-2 rounded-lg text-gray-400">YOLOv5 <span class="text-gray-600">(2020)</span></span>
+                <span class="bg-purple-500/20 px-4 py-2 rounded-lg text-purple-300 font-bold border border-purple-500/30">YOLOv8 <span class="text-purple-400">(2023)</span></span>
+                <span class="bg-gray-800 px-4 py-2 rounded-lg text-gray-400">YOLOv11 <span class="text-gray-600">(2024)</span></span>
+            </div>
+            <p class="text-gray-400 mt-4">كل إصدار أسرع وأدق من السابق. YOLOv8 من شركة <span class="term">Ultralytics</span> ويدعم الكشف والتصنيف والتقسيم <span class="term">Segmentation</span> في نموذج واحد.</p>
+        </div>
+
+        <div class="link-box">
+            <p class="text-gray-300 leading-8">📖 <a href="https://docs.ultralytics.com/" target="_blank">التوثيق الرسمي لـ Ultralytics YOLOv8</a></p>
+            <p class="text-gray-300 leading-8">🧪 <a href="https://colab.research.google.com/" target="_blank">Google Colab — بيئة تدريب مجانية بـ GPU</a></p>
+            <p class="text-gray-300 leading-8">📊 <a href="https://universe.roboflow.com/" target="_blank">Roboflow Universe — آلاف الداتاسيت الجاهزة للتدريب</a></p>
+        </div>
+    </section>
+
+    <!-- 7. AI Examples -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-purple-300">٧. أمثلة على الذكاء الاصطناعي في الحياة <span class="term">Real-world AI Examples</span></h2>
+        <div class="grid md:grid-cols-2 gap-4">
+            <div class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-xl px-6 py-5">
+                <span class="text-3xl">📱</span>
+                <div><strong class="text-white text-lg">فتح الهاتف بالوجه <span class="term">Face Recognition</span></strong><p class="text-gray-400">يستخدم كشف الأجسام + تصنيف الوجوه</p></div>
+            </div>
+            <div class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-xl px-6 py-5">
+                <span class="text-3xl">🗣️</span>
+                <div><strong class="text-white text-lg">المساعد الصوتي <span class="term">Voice Assistant (NLP)</span></strong><p class="text-gray-400">Siri, Google Assistant — معالجة لغة طبيعية</p></div>
+            </div>
+            <div class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-xl px-6 py-5">
+                <span class="text-3xl">🚗</span>
+                <div><strong class="text-white text-lg">السيارة ذاتية القيادة <span class="term">Self-driving Cars</span></strong><p class="text-gray-400">Tesla Autopilot — كشف أجسام + تعلم معزز</p></div>
+            </div>
+            <div class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-xl px-6 py-5">
+                <span class="text-3xl">🏥</span>
+                <div><strong class="text-white text-lg">تشخيص الأمراض <span class="term">Medical Diagnosis</span></strong><p class="text-gray-400">تحليل صور الأشعة للكشف عن الأورام</p></div>
+            </div>
+            <div class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-xl px-6 py-5">
+                <span class="text-3xl">🎨</span>
+                <div><strong class="text-white text-lg">توليد الصور <span class="term">Image Generation (DALL-E, Midjourney)</span></strong><p class="text-gray-400">إنشاء صور من وصف نصي</p></div>
+            </div>
+            <div class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-xl px-6 py-5">
+                <span class="text-3xl">💬</span>
+                <div><strong class="text-white text-lg">الدردشة الذكية <span class="term">Chatbots (ChatGPT, Gemini)</span></strong><p class="text-gray-400">نماذج لغوية كبيرة <span class="term">LLMs</span></p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Navigation -->
+    <div class="flex justify-between items-center border-t border-white/10 pt-8">
+        <a href="index.html" class="text-gray-400 hover:text-white transition text-lg">→ الرئيسية</a>
+        <a href="02_datasets.html" class="bg-blue-500/10 border border-blue-500/30 text-blue-300 px-8 py-4 rounded-xl font-bold hover:bg-blue-500/20 transition text-lg">الفصل التالي: البيانات والداتاسيت ←</a>
+    </div>
+</main>
+</body>
+</html>

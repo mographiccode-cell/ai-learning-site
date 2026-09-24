@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>الفصل الرابع — التقييم والمقاييس Evaluation & Metrics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared.css">
+</head>
+<body class="bg-gray-950 text-white font-['Tajawal'] min-h-screen">
+<nav class="sticky top-0 z-50 bg-gray-950/80 backdrop-blur-xl border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-8 py-3 flex items-center justify-between">
+        <a href="03_training.html" class="text-gray-400 hover:text-white transition">→ الفصل السابق</a>
+        <span class="text-amber-400 font-bold">Chapter 4 — الفصل ٤ من ٥</span>
+        <a href="05_problems.html" class="text-amber-400 hover:text-amber-300 transition">الفصل التالي ←</a>
+    </div>
+</nav>
+<main class="max-w-7xl mx-auto px-8 py-14">
+    <div class="mb-14">
+        <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/20 rounded-full px-5 py-2 text-amber-300 mb-4">📈 Chapter 4 — الفصل الرابع</div>
+        <h1 class="text-4xl md:text-5xl font-black mb-5">التقييم والمقاييس <span class="term">Evaluation & Performance Metrics</span></h1>
+        <p class="text-gray-400 text-xl leading-9">بعد التدريب <span class="term">Training</span>، كيف نعرف أن النموذج <span class="term">Model</span> جيد فعلاً؟ هنا تأتي مقاييس الأداء <span class="term">Performance Metrics</span>.</p>
+    </div>
+
+    <!-- 1. Why Evaluate -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-amber-300">١. لماذا نقيّم النموذج؟ <span class="term">Why Evaluate?</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-5">التقييم <span class="term">Evaluation</span> هو <strong>امتحان للنموذج</strong> بعد التدريب. نختبره على بيانات <strong>لم يرَها <span class="term">Unseen Data</span></strong> لنعرف: هل تعلّم فعلاً <span class="term">Generalized</span> أم حفظ فقط <span class="term">Memorized</span>؟</p>
+        <div class="example-box">
+            <p class="text-gray-300 leading-9 text-lg"><strong>مثال:</strong> طالب طب تدرب على 100 حالة. نعطيه 20 حالة جديدة لم يرَها — إذا شخّصها صح = تعلّم فعلاً. إذا أخطأ كثيراً = حفظ الحالات القديمة بدون فهم. التقييم يكشف الحقيقة!</p>
+        </div>
+    </section>
+
+    <!-- 2. Confidence -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-amber-300">٢. درجة الثقة <span class="term">Confidence Score</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-5">عندما يكتشف النموذج شيئاً، يعطيه <strong>نسبة ثقة <span class="term">Confidence Percentage</span></strong> من 0% إلى 100%. كلما ارتفع الرقم، كلما كان <strong>أكثر تأكداً <span class="term">More Certain</span></strong> من اكتشافه.</p>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-7">
+            <div class="space-y-5">
+                <div>
+                    <div class="flex justify-between mb-2 text-lg"><span>🐕 كلب — <span class="term">High Confidence</span></span><span class="text-emerald-400 font-bold text-xl">95%</span></div>
+                    <div class="h-4 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-emerald-400 rounded-full transition-all" style="width:95%"></div></div>
+                    <p class="text-gray-400 text-sm mt-1">النموذج واثق جداً — غالباً اكتشاف صحيح</p>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-2 text-lg"><span>🐈 قطة — <span class="term">Medium Confidence</span></span><span class="text-amber-400 font-bold text-xl">68%</span></div>
+                    <div class="h-4 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-amber-400 rounded-full" style="width:68%"></div></div>
+                    <p class="text-gray-400 text-sm mt-1">ثقة متوسطة — قد يكون صحيحاً أو خطأ</p>
+                </div>
+                <div>
+                    <div class="flex justify-between mb-2 text-lg"><span>❓ طائر — <span class="term">Low Confidence</span></span><span class="text-rose-400 font-bold text-xl">30%</span></div>
+                    <div class="h-4 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-rose-400 rounded-full" style="width:30%"></div></div>
+                    <p class="text-gray-400 text-sm mt-1">ثقة منخفضة — غالباً خطأ، يُستبعد</p>
+                </div>
+            </div>
+        </div>
+        <div class="key-box">
+            <p class="text-gray-300 leading-9 text-lg">عادةً نضع <strong>حد أدنى <span class="term">Confidence Threshold</span></strong> مثل 50%. أي اكتشاف تحت هذا الحد يُرفض تلقائياً. يمكنك تعديل هذا الحد حسب مشروعك.</p>
+        </div>
+    </section>
+
+    <!-- 3. Precision & Recall -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-amber-300">٣. الدقة والاستدعاء <span class="term">Precision & Recall</span></h2>
+        <div class="grid md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-7">
+                <h3 class="text-2xl font-bold mb-4 text-blue-300">🎯 الدقة <span class="term">Precision</span></h3>
+                <p class="text-gray-300 text-lg leading-9 mb-4">من كل ما <strong>قاله النموذج أنه إيجابي <span class="term">Predicted Positive</span></strong>، كم نسبة اللي <strong>فعلاً إيجابي</strong>؟</p>
+                <div class="bg-gray-900 rounded-xl p-4 text-center font-mono text-lg mb-4" dir="ltr">
+                    <span class="text-blue-300">Precision</span> = TP ÷ (TP + FP)
+                </div>
+                <div class="example-box">
+                    <p class="text-gray-300 leading-9"><strong>مثال:</strong> نظام كشف سبام أوقف 100 رسالة. عند الفحص: 85 منها فعلاً سبام و15 كانت رسائل عادية (أخطأ فيها). <strong><span class="term">Precision</span> = 85/100 = 85%</strong></p>
+                    <p class="text-gray-400 mt-2">المعنى: "هل أثق في اكتشافات النموذج؟"</p>
+                </div>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-7">
+                <h3 class="text-2xl font-bold mb-4 text-purple-300">📡 الاستدعاء <span class="term">Recall (Sensitivity)</span></h3>
+                <p class="text-gray-300 text-lg leading-9 mb-4">من كل الحالات <strong>الإيجابية الحقيقية <span class="term">Actual Positive</span></strong>، كم نسبة اللي <strong>اكتشفها النموذج</strong>؟</p>
+                <div class="bg-gray-900 rounded-xl p-4 text-center font-mono text-lg mb-4" dir="ltr">
+                    <span class="text-purple-300">Recall</span> = TP ÷ (TP + FN)
+                </div>
+                <div class="example-box">
+                    <p class="text-gray-300 leading-9"><strong>مثال:</strong> البريد فيه 100 رسالة سبام فعلية. النظام اكتشف 80 منها وفاته 20. <strong><span class="term">Recall</span> = 80/100 = 80%</strong></p>
+                    <p class="text-gray-400 mt-2">المعنى: "هل يفوّت النموذج حالات مهمة؟"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. mAP & IoU -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-amber-300">٤. متوسط الدقة ونسبة التقاطع <span class="term">mAP & IoU</span></h2>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-7 mb-5">
+            <h3 class="text-xl font-bold mb-4 text-amber-300">🏆 <span class="term">mAP — mean Average Precision</span></h3>
+            <p class="text-gray-300 text-lg leading-9 mb-3">المقياس الشامل <span class="term">Overall Metric</span> الذي يجمع <span class="term">Precision</span> و <span class="term">Recall</span> لجميع الفئات <span class="term">Classes</span>. <strong>كلما ارتفع = النموذج أفضل</strong>.</p>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-blue-500/10 border border-blue-500/20 rounded-xl p-5">
+                    <div class="font-bold text-blue-300 text-lg"><span class="term">mAP@50</span></div>
+                    <p class="text-gray-400 mt-2">الدقة عندما يكون تطابق المربعات <span class="term">IoU ≥ 50%</span>. المقياس الأكثر استخداماً.</p>
+                </div>
+                <div class="bg-purple-500/10 border border-purple-500/20 rounded-xl p-5">
+                    <div class="font-bold text-purple-300 text-lg"><span class="term">mAP@50-95</span></div>
+                    <p class="text-gray-400 mt-2">المتوسط عند عتبات <span class="term">Thresholds</span> من 50% إلى 95%. أصعب وأدق.</p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-7">
+            <h3 class="text-xl font-bold mb-4 text-teal-300">📐 نسبة التقاطع <span class="term">IoU — Intersection over Union</span></h3>
+            <p class="text-gray-300 text-lg leading-9 mb-3">يقيس <strong>مدى تطابق المربع <span class="term">Bounding Box</span></strong> الذي رسمه النموذج مع المربع الحقيقي <span class="term">Ground Truth Box</span>.</p>
+            <div class="example-box">
+                <p class="text-gray-300 leading-9 text-lg">تخيل مربعين متداخلين: <span class="term">IoU</span> = (المساحة المشتركة <span class="term">Intersection</span>) ÷ (المساحة الكلية <span class="term">Union</span>). إذا <span class="term">IoU = 0.8</span> يعني تطابق 80% — ممتاز! إذا <span class="term">IoU = 0.2</span> يعني تطابق 20% — سيء.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Confusion Matrix -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-amber-300">٥. مصفوفة التشويش <span class="term">Confusion Matrix</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-5">جدول يوضح <strong>أين أصاب النموذج وأين أخطأ <span class="term">Correct vs Incorrect Predictions</span></strong> لكل فئة.</p>
+
+        <!-- Diagram -->
+        <div class="rounded-2xl overflow-hidden border border-white/10 mb-6">
+            <img src="assets/images/confusion_matrix_simple.png" alt="Confusion Matrix Diagram" class="w-full object-contain max-h-72">
+            <p class="text-center text-gray-500 text-sm py-3 bg-white/5">📊 مخطط توضيحي — كيف تُقرأ مصفوفة التشويش <span class="term">Confusion Matrix: TP, TN, FP, FN</span></p>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-7 mb-5 overflow-x-auto">
+            <h4 class="font-bold text-lg mb-5 text-center">مثال: نظام تصنيف بريد (سبام / عادي) <span class="term">Spam Classification Example</span></h4>
+            <table class="w-full max-w-2xl mx-auto text-center text-lg border-collapse">
+                <thead>
+                    <tr><th class="p-4"></th><th class="p-4"></th><th colspan="2" class="p-4 text-amber-300 border-b border-white/10">توقع النموذج <span class="term">Predicted</span></th></tr>
+                    <tr><th class="p-4"></th><th class="p-4"></th><th class="p-4 text-rose-300 bg-rose-500/10 rounded-tl-lg">سبام <span class="term">Spam</span></th><th class="p-4 text-emerald-300 bg-emerald-500/10 rounded-tr-lg">عادي <span class="term">Not Spam</span></th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="2" class="p-4 text-amber-300 font-bold" style="writing-mode:vertical-rl">الحقيقة <span class="term">Actual</span></td>
+                        <td class="p-4 text-rose-300 font-bold bg-rose-500/5">سبام</td>
+                        <td class="p-4 bg-emerald-500/15 font-bold text-emerald-300 text-2xl">80 ✅<br><span class="text-sm text-gray-400">TP — اكتشفه صح</span></td>
+                        <td class="p-4 bg-rose-500/10 text-rose-300 text-xl">20 ❌<br><span class="text-sm text-gray-400">FN — فاته!</span></td>
+                    </tr>
+                    <tr>
+                        <td class="p-4 text-emerald-300 font-bold bg-emerald-500/5">عادي</td>
+                        <td class="p-4 bg-rose-500/10 text-rose-300 text-xl">5 ❌<br><span class="text-sm text-gray-400">FP — إنذار كاذب</span></td>
+                        <td class="p-4 bg-emerald-500/15 font-bold text-emerald-300 text-2xl">95 ✅<br><span class="text-sm text-gray-400">TN — تركه صح</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-7">
+            <h4 class="font-bold text-lg mb-4">شرح المصطلحات الأربعة <span class="term">TP, TN, FP, FN Explained</span>:</h4>
+            <div class="grid md:grid-cols-2 gap-4 text-base">
+                <div class="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-5">
+                    <strong class="text-emerald-300 text-lg"><span class="term">TP — True Positive</span></strong>
+                    <p class="text-gray-300 mt-2 leading-8">النموذج قال "سبام" ← وفعلاً سبام ✅. <strong>إصابة!</strong></p>
+                </div>
+                <div class="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-5">
+                    <strong class="text-emerald-300 text-lg"><span class="term">TN — True Negative</span></strong>
+                    <p class="text-gray-300 mt-2 leading-8">النموذج قال "عادي" ← وفعلاً عادي ✅. <strong>إصابة!</strong></p>
+                </div>
+                <div class="bg-rose-500/10 border border-rose-500/20 rounded-xl p-5">
+                    <strong class="text-rose-300 text-lg"><span class="term">FP — False Positive</span> (إنذار كاذب <span class="term">False Alarm</span>)</strong>
+                    <p class="text-gray-300 mt-2 leading-8">النموذج قال "سبام" ← لكنها رسالة عادية! ❌</p>
+                </div>
+                <div class="bg-rose-500/10 border border-rose-500/20 rounded-xl p-5">
+                    <strong class="text-rose-300 text-lg"><span class="term">FN — False Negative</span> (تفويت <span class="term">Missed Detection</span>)</strong>
+                    <p class="text-gray-300 mt-2 leading-8">النموذج قال "عادي" ← لكنها سبام فعلاً! ❌</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Loss Function -->
+    <section class="mb-14">
+        <h2 class="text-3xl font-bold mb-5 text-amber-300">٦. دالة الخسارة <span class="term">Loss Function</span></h2>
+        <p class="text-gray-300 text-lg leading-9 mb-5"><span class="term">Loss</span> هو <strong>رقم يقيس مقدار خطأ النموذج <span class="term">Error Measurement</span></strong>. الهدف من التدريب: تقليل هذا الرقم لأدنى قيمة ممكنة <span class="term">Minimize Loss</span>.</p>
+        <div class="grid md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+                <strong class="text-emerald-300 text-lg"><span class="term">Training Loss</span></strong>
+                <p class="text-gray-300 leading-8 mt-2">الخطأ على بيانات التدريب — يجب أن <strong>ينزل ↓</strong> مع كل <span class="term">Epoch</span>.</p>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+                <strong class="text-amber-300 text-lg"><span class="term">Validation Loss</span></strong>
+                <p class="text-gray-300 leading-8 mt-2">الخطأ على بيانات التحقق — إذا بدأ <strong>يرتفع ↑</strong> = <span class="term">Overfitting</span>!</p>
+            </div>
+        </div>
+        <div class="key-box">
+            <p class="text-gray-300 leading-9 text-lg"><strong>أفضل نموذج <span class="term">best.pt / best model checkpoint</span></strong> هو الذي حقق أقل <span class="term">Validation Loss</span> أثناء التدريب. هذا هو الملف الذي يُستخدم في التطبيق النهائي <span class="term">Production</span>.</p>
+        </div>
+    </section>
+
+    <div class="link-box">
+        <p class="text-gray-300 leading-8">📖 <a href="https://docs.ultralytics.com/guides/yolo-performance-metrics/" target="_blank">شرح مفصل لمقاييس YOLO من Ultralytics</a></p>
+        <p class="text-gray-300 leading-8">📊 <a href="https://www.evidentlyai.com/classification-metrics" target="_blank">دليل شامل لمقاييس التصنيف — Evidently AI</a></p>
+    </div>
+
+    <div class="flex justify-between items-center border-t border-white/10 pt-8 mt-8">
+        <a href="03_training.html" class="text-gray-400 hover:text-white transition text-lg">→ الفصل السابق</a>
+        <a href="05_problems.html" class="bg-rose-500/10 border border-rose-500/30 text-rose-300 px-8 py-4 rounded-xl font-bold hover:bg-rose-500/20 transition text-lg">الفصل التالي: مشاكل البيانات ←</a>
+    </div>
+</main>
+</body>
+</html>
