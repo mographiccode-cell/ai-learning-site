@@ -1,7 +1,9 @@
 AI Learning Website - Live URL
 ================================
 
-Website URL: https://mographiccode-cell.github.io/ai-learning-site/
+Main Page: https://mographiccode-cell.github.io/ai-learning-site/
+
+Summary Page (Quick Reference): https://mographiccode-cell.github.io/ai-learning-site/summary.html
 
 GitHub Repository: https://github.com/mographiccode-cell/ai-learning-site
 
