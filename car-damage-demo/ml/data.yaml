@@ -1,0 +1,16 @@
+# Corrected dataset configuration for academic evaluation.
+# Put the dataset under ./dataset with separate train/val/test splits.
+path: ./dataset
+train: images/train
+val: images/val
+test: images/test
+
+names:
+  0: damaged door
+  1: damaged window
+  2: damaged headlight
+  3: damaged mirror
+  4: dent
+  5: damaged hood
+  6: damaged bumper
+  7: damaged wind shield
