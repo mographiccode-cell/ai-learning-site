@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>ملخص شامل — الذكاء الاصطناعي في صفحة واحدة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        .quick-card { border-right: 4px solid; }
+        .arrow-flow { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+        .arrow-flow .step { padding: 0.5rem 1rem; border-radius: 10px; font-weight: 700; white-space: nowrap; }
+        .arrow-flow .arr { color: #6b7280; font-size: 1.2rem; }
+        .mini-term { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); padding: 2px 8px; border-radius: 5px; font-weight: 700; color: #c4b5fd; font-size: 0.82em; direction: ltr; display: inline; unicode-bidi: plaintext; }
+    </style>
+</head>
+<body class="bg-gray-950 text-white font-['Tajawal'] min-h-screen">
+
+<header class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-indigo-900/40 via-purple-900/30 to-pink-900/20"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-indigo-500/10 rounded-full blur-[120px]"></div>
+    <div class="relative max-w-6xl mx-auto px-6 py-16 text-center">
+        <div class="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/20 rounded-full px-5 py-2 text-indigo-300 text-sm mb-4">
+            ⚡ ملخص سريع — صفحة واحدة تغطي كل شيء
+        </div>
+        <h1 class="text-3xl md:text-5xl font-black leading-tight mb-4">
+            <span class="bg-gradient-to-l from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">ملخص الذكاء الاصطناعي</span>
+            <br>كل ما تحتاجه في مكان واحد
+        </h1>
+        <p class="text-gray-400 text-lg max-w-2xl mx-auto leading-8 mb-4">
+            ملخص مبسّط وسريع يغطي الفصول الخمسة — مثالي لمن يريد فهم الأسس في دقائق
+        </p>
+        <div class="flex justify-center gap-3 flex-wrap">
+            <a href="index.html" class="bg-white/10 border border-white/20 text-gray-300 px-5 py-2 rounded-lg text-sm hover:bg-white/20 transition">الصفحة الرئيسية</a>
+            <a href="01_ai_intro.html" class="bg-white/5 border border-white/10 text-gray-400 px-5 py-2 rounded-lg text-sm hover:bg-white/10 transition">الفصل ١</a>
+            <a href="02_datasets.html" class="bg-white/5 border border-white/10 text-gray-400 px-5 py-2 rounded-lg text-sm hover:bg-white/10 transition">الفصل ٢</a>
+            <a href="03_training.html" class="bg-white/5 border border-white/10 text-gray-400 px-5 py-2 rounded-lg text-sm hover:bg-white/10 transition">الفصل ٣</a>
+            <a href="04_evaluation.html" class="bg-white/5 border border-white/10 text-gray-400 px-5 py-2 rounded-lg text-sm hover:bg-white/10 transition">الفصل ٤</a>
+            <a href="05_problems.html" class="bg-white/5 border border-white/10 text-gray-400 px-5 py-2 rounded-lg text-sm hover:bg-white/10 transition">الفصل ٥</a>
+        </div>
+    </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-6 py-12">
+
+    <!-- ==================== SECTION 1: AI BASICS ==================== -->
+    <section class="mb-16">
+        <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 rounded-xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-2xl">🧠</div>
+            <div>
+                <h2 class="text-2xl font-black text-purple-300">الفصل ١: ما هو الذكاء الاصطناعي؟</h2>
+                <p class="text-gray-500 text-sm"><span class="mini-term">AI — Artificial Intelligence</span></p>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4 mb-5">
+            <div class="bg-rose-500/5 border border-rose-500/20 rounded-xl p-5 quick-card" style="border-color: #f43f5e;">
+                <h4 class="font-bold text-rose-300 mb-2">البرمجة التقليدية</h4>
+                <p class="text-gray-400 text-sm leading-7">أنت تكتب القواعد يدوياً <span class="mini-term">if/else</span> — لا تعمل مع البيانات الكبيرة</p>
+            </div>
+            <div class="bg-emerald-500/5 border border-emerald-500/20 rounded-xl p-5 quick-card" style="border-color: #10b981;">
+                <h4 class="font-bold text-emerald-300 mb-2">الذكاء الاصطناعي</h4>
+                <p class="text-gray-400 text-sm leading-7">تعطيه أمثلة كثيرة ← يستخرج القواعد بنفسه ← يعمّم على حالات جديدة</p>
+            </div>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-xl p-5 mb-5">
+            <h4 class="font-bold text-lg mb-3">شجرة الذكاء الاصطناعي <span class="mini-term">AI Hierarchy</span></h4>
+            <div class="flex flex-wrap justify-center items-center gap-2 text-sm">
+                <span class="bg-purple-500/20 border border-purple-500/30 text-purple-300 px-4 py-2 rounded-lg font-bold">🧠 ذكاء اصطناعي <span class="mini-term">AI</span></span>
+                <span class="text-gray-500">←</span>
+                <span class="bg-blue-500/20 border border-blue-500/30 text-blue-300 px-4 py-2 rounded-lg font-bold">📚 تعلم آلة <span class="mini-term">ML</span></span>
+                <span class="text-gray-500">←</span>
+                <span class="bg-teal-500/20 border border-teal-500/30 text-teal-300 px-4 py-2 rounded-lg font-bold">🔬 تعلم عميق <span class="mini-term">DL</span></span>
+            </div>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+            <h4 class="font-bold mb-3">أنواع تعلم الآلة <span class="mini-term">3 Types of ML</span></h4>
+            <div class="grid md:grid-cols-3 gap-3">
+                <div class="bg-white/5 rounded-lg p-4 text-center">
+                    <div class="text-2xl mb-2">📖</div>
+                    <strong class="text-sm">بإشراف <span class="mini-term">Supervised</span></strong>
+                    <p class="text-gray-500 text-xs mt-1">بيانات + إجابات صحيحة</p>
+                </div>
+                <div class="bg-white/5 rounded-lg p-4 text-center">
+                    <div class="text-2xl mb-2">🔍</div>
+                    <strong class="text-sm">بدون إشراف <span class="mini-term">Unsupervised</span></strong>
+                    <p class="text-gray-500 text-xs mt-1">بيانات بدون إجابات ← يكتشف التجمعات</p>
+                </div>
+                <div class="bg-white/5 rounded-lg p-4 text-center">
+                    <div class="text-2xl mb-2">🎮</div>
+                    <strong class="text-sm">معزّز <span class="mini-term">Reinforcement</span></strong>
+                    <p class="text-gray-500 text-xs mt-1"> Trial & Error + مكافأة/عقوبة</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 2: DATASETS ==================== -->
+    <section class="mb-16">
+        <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-2xl">📊</div>
+            <div>
+                <h2 class="text-2xl font-black text-blue-300">الفصل ٢: البيانات والداتاسيت</h2>
+                <p class="text-gray-500 text-sm"><span class="mini-term">Datasets & Data Preparation</span></p>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4 mb-5">
+            <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+                <h4 class="font-bold mb-3">أنواع البيانات <span class="mini-term">Data Types</span></h4>
+                <div class="space-y-2 text-sm text-gray-300">
+                    <p>🖼️ صور <span class="mini-term">Images</span> — تصنيف + كشف أجسام</p>
+                    <p>📝 نصوص <span class="mini-term">Text</span> — تحليل مشاعر + ترجمة</p>
+                    <p>🔢 جداول <span class="mini-term">Tabular</span> — تنبؤ + انحدار</p>
+                    <p>🎵 صوت/فيديو <span class="mini-term">Audio/Video</span> — التعرف على الكلام</p>
+                </div>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+                <h4 class="font-bold mb-3">التوصيف / التسمية <span class="mini-term">Annotation</span></h4>
+                <div class="space-y-2 text-sm text-gray-300">
+                    <p>🏷️ تسمية الصورة <span class="mini-term">Image Label</span> — تسمية واحدة للصورة كلها</p>
+                    <p>📦 مربعات <span class="mini-term">Bounding Box</span> — مستطيل حول كل كائن</p>
+                    <p>🧩 تقسيم بكسلات <span class="mini-term">Segmentation</span> — تحديد كل بكسل (الأدق)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-xl p-5 mb-5">
+            <h4 class="font-bold mb-3">تقسيم البيانات <span class="mini-term">Train / Val / Test Split</span></h4>
+            <div class="grid grid-cols-3 gap-3 text-center text-sm">
+                <div class="bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-3">
+                    <div class="text-2xl font-black text-emerald-400">80%</div>
+                    <strong class="text-emerald-300">تدريب <span class="mini-term">Train</span></strong>
+                    <p class="text-gray-500 text-xs mt-1">يتعلم منه النموذج</p>
+                </div>
+                <div class="bg-amber-500/10 border border-amber-500/20 rounded-lg p-3">
+                    <div class="text-2xl font-black text-amber-400">10%</div>
+                    <strong class="text-amber-300">تحقق <span class="mini-term">Val</span></strong>
+                    <p class="text-gray-500 text-xs mt-1">يُختبر أثناء التدريب</p>
+                </div>
+                <div class="bg-rose-500/10 border border-rose-500/20 rounded-lg p-3">
+                    <div class="text-2xl font-black text-rose-400">10%</div>
+                    <strong class="text-rose-300">اختبار <span class="mini-term">Test</span></strong>
+                    <p class="text-gray-500 text-xs mt-1">امتحان نهائي</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 3: TRAINING ==================== -->
+    <section class="mb-16">
+        <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 rounded-xl bg-teal-500/15 border border-teal-500/30 flex items-center justify-center text-2xl">⚙️</div>
+            <div>
+                <h2 class="text-2xl font-black text-teal-300">الفصل ٣: التدريب وإعداداته</h2>
+                <p class="text-gray-500 text-sm"><span class="mini-term">Training & Hyperparameters</span></p>
+            </div>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-xl p-5 mb-5">
+            <h4 class="font-bold mb-3">دورة التدريب <span class="mini-term">Training Loop</span></h4>
+            <div class="arrow-flow justify-center text-sm">
+                <span class="step bg-blue-500/20 text-blue-300">📷 بيانات <span class="mini-term">Input</span></span>
+                <span class="arr">→</span>
+                <span class="step bg-purple-500/20 text-purple-300">🤔 توقع <span class="mini-term">Prediction</span></span>
+                <span class="arr">→</span>
+                <span class="step bg-rose-500/20 text-rose-300">📊 خطأ <span class="mini-term">Loss</span></span>
+                <span class="arr">→</span>
+                <span class="step bg-emerald-500/20 text-emerald-300">🔧 تعديل <span class="mini-term">Backprop</span></span>
+                <span class="arr">→</span>
+                <span class="step bg-amber-500/20 text-amber-300">🔄 تكرار</span>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4 mb-5">
+            <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+                <h4 class="font-bold mb-3">الإعدادات الأساسية <span class="mini-term">Key Hyperparameters</span></h4>
+                <div class="space-y-3 text-sm">
+                    <div>
+                        <strong class="text-teal-300">دورات <span class="mini-term">Epochs</span></strong>
+                        <p class="text-gray-400">عدد المرات التي يرى فيها النموذج كل البيانات. القيم الشائعة: <span class="mini-term">50-300</span></p>
+                    </div>
+                    <div>
+                        <strong class="text-teal-300">حجم الدفعة <span class="mini-term">Batch Size</span></strong>
+                        <p class="text-gray-400">كم عينة يراها قبل التعديل. المثالي: <span class="mini-term">16-64</span></p>
+                    </div>
+                    <div>
+                        <strong class="text-teal-300">معدل التعلم <span class="mini-term">Learning Rate</span></strong>
+                        <p class="text-gray-400">حجم خطوة التعديل. أهم إعداد! الشائع: <span class="mini-term">0.001 - 0.01</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+                <h4 class="font-bold mb-3">التعلم بالنقل <span class="mini-term">Transfer Learning</span></h4>
+                <div class="space-y-2 text-sm text-gray-300">
+                    <p>✅ نموذج مُدرَّب مسبقاً ← نعيد تدريبه على بياناتنا</p>
+                    <p>✅ يحتاج آلاف الصور فقط بدلاً من الملايين</p>
+                    <p>✅ دقائق بدلاً من أيام</p>
+                    <p>✅ يعمل على GPU مجاني <span class="mini-term">Google Colab</span></p>
+                </div>
+                <div class="mt-3 bg-white/5 rounded-lg p-3 text-xs text-gray-400">
+                    <strong>مثال:</strong> طبيب عام يريد التخصص في طب العيون — لا يدرس من الصفر، فقط يتخصص!
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+            <h4 class="font-bold mb-3">تضخيم البيانات <span class="mini-term">Data Augmentation</span></h4>
+            <div class="flex flex-wrap gap-2 text-sm">
+                <span class="bg-white/5 px-3 py-1.5 rounded-lg">🔄 قلب <span class="mini-term">Flip</span></span>
+                <span class="bg-white/5 px-3 py-1.5 rounded-lg">🔍 تكبير <span class="mini-term">Zoom</span></span>
+                <span class="bg-white/5 px-3 py-1.5 rounded-lg">🎨 ألوان <span class="mini-term">HSV</span></span>
+                <span class="bg-white/5 px-3 py-1.5 rounded-lg">📐 تدوير <span class="mini-term">Rotation</span></span>
+                <span class="bg-white/5 px-3 py-1.5 rounded-lg">✂️ قص <span class="mini-term">Crop</span></span>
+            </div>
+            <p class="text-gray-500 text-xs mt-2">500 صورة بعد التضخيم = 3,000 صورة!</p>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 4: EVALUATION ==================== -->
+    <section class="mb-16">
+        <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-2xl">📈</div>
+            <div>
+                <h2 class="text-2xl font-black text-amber-300">الفصل ٤: التقييم والمقاييس</h2>
+                <p class="text-gray-500 text-sm"><span class="mini-term">Evaluation & Metrics</span></p>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4 mb-5">
+            <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+                <h4 class="font-bold text-blue-300 mb-2">الدقة <span class="mini-term">Precision</span></h4>
+                <p class="text-gray-400 text-sm leading-7">من كل ما قاله "إيجابي" ← كم فعلاً إيجابي؟</p>
+                <div class="bg-gray-900 rounded-lg p-2 mt-2 text-xs font-mono text-center" dir="ltr">TP ÷ (TP + FP)</div>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+                <h4 class="font-bold text-purple-300 mb-2">الاستدعاء <span class="mini-term">Recall</span></h4>
+                <p class="text-gray-400 text-sm leading-7">من كل الحالات الإيجابية الحقيقية ← كم اكتشفها؟</p>
+                <div class="bg-gray-900 rounded-lg p-2 mt-2 text-xs font-mono text-center" dir="ltr">TP ÷ (TP + FN)</div>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+                <h4 class="font-bold text-amber-300 mb-2">متوسط الدقة <span class="mini-term">mAP</span></h4>
+                <p class="text-gray-400 text-sm leading-7">يجمع Precision + Recall لجميع الفئات. كلما ارتفع = أفضل</p>
+                <div class="bg-gray-900 rounded-lg p-2 mt-2 text-xs font-mono text-center" dir="ltr">mAP@50 — الأكثر استخداماً</div>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4 mb-5">
+            <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+                <h4 class="font-bold mb-3">الخسائر الأربعة <span class="mini-term">TP, TN, FP, FN</span></h4>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div class="bg-emerald-500/10 rounded-lg p-2">
+                        <strong class="text-emerald-300">TP ✅</strong>
+                        <p class="text-gray-400">قال إيجابي ← وإيجابي فعلاً</p>
+                    </div>
+                    <div class="bg-emerald-500/10 rounded-lg p-2">
+                        <strong class="text-emerald-300">TN ✅</strong>
+                        <p class="text-gray-400">قال سلبي ← وسلبي فعلاً</p>
+                    </div>
+                    <div class="bg-rose-500/10 rounded-lg p-2">
+                        <strong class="text-rose-300">FP ❌</strong>
+                        <p class="text-gray-400">قال إيجابي ← لكنه سلبي (إنذار كاذب)</p>
+                    </div>
+                    <div class="bg-rose-500/10 rounded-lg p-2">
+                        <strong class="text-rose-300">FN ❌</strong>
+                        <p class="text-gray-400">قال سلبي ← لكنه إيجابي (تفويت)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+                <h4 class="font-bold mb-3">دالة الخسارة <span class="mini-term">Loss</span></h4>
+                <div class="space-y-2 text-sm">
+                    <p class="text-gray-300"><strong class="text-emerald-300">Training Loss</strong> ← يجب أن <strong>ينزل ↓</strong> مع كل Epoch</p>
+                    <p class="text-gray-300"><strong class="text-amber-300">Validation Loss</strong> ← إذا بدأ <strong>بالارتفاع ↑</strong> = Overfitting!</p>
+                </div>
+                <p class="text-gray-500 text-xs mt-3">أفضل نموذج = أقل Validation Loss</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION 5: PROBLEMS ==================== -->
+    <section class="mb-16">
+        <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 rounded-xl bg-rose-500/15 border border-rose-500/30 flex items-center justify-center text-2xl">🛡️</div>
+            <div>
+                <h2 class="text-2xl font-black text-rose-300">الفصل ٥: المشاكل الشائعة</h2>
+                <p class="text-gray-500 text-sm"><span class="mini-term">Common Data Problems</span></p>
+            </div>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-xl p-5 overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="border-b border-white/10">
+                        <th class="p-3 text-right text-gray-400">المشكلة</th>
+                        <th class="p-3 text-right text-gray-400">السبب</th>
+                        <th class="p-3 text-right text-gray-400">الحل</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-300">
+                    <tr class="border-b border-white/5">
+                        <td class="p-3"><span class="text-rose-300 font-bold">Overfitting</span><br><span class="text-gray-500 text-xs">الإفراط في التعلم</span></td>
+                        <td class="p-3 text-gray-400">يحفظ بدل ما يفهم</td>
+                        <td class="p-3 text-emerald-400 text-xs">Augmentation, Early Stopping, Dropout</td>
+                    </tr>
+                    <tr class="border-b border-white/5">
+                        <td class="p-3"><span class="text-rose-300 font-bold">Underfitting</span><br><span class="text-gray-500 text-xs">قصور التعلم</span></td>
+                        <td class="p-3 text-gray-400">لم يتعلم كفاية</td>
+                        <td class="p-3 text-emerald-400 text-xs">Epochs أكثر, نموذج أكبر, تعديل LR</td>
+                    </tr>
+                    <tr class="border-b border-white/5">
+                        <td class="p-3"><span class="text-rose-300 font-bold">Imbalance</span><br><span class="text-gray-500 text-xs">عدم توازن البيانات</span></td>
+                        <td class="p-3 text-gray-400">فئة مسيطرة على الباقي</td>
+                        <td class="p-3 text-emerald-400 text-xs">Oversampling, Class Weights, SMOTE</td>
+                    </tr>
+                    <tr class="border-b border-white/5">
+                        <td class="p-3"><span class="text-rose-300 font-bold">Bias</span><br><span class="text-gray-500 text-xs">التحيز</span></td>
+                        <td class="p-3 text-gray-400">بيانات غير ممثلة للواقع</td>
+                        <td class="p-3 text-emerald-400 text-xs">تنويع البيانات, مراجعة التوصيف</td>
+                    </tr>
+                    <tr class="border-b border-white/5">
+                        <td class="p-3"><span class="text-rose-300 font-bold">Data Leakage</span><br><span class="text-gray-500 text-xs">تسريب البيانات</span></td>
+                        <td class="p-3 text-gray-400">معلومات من الاختبار تتسرب للتدريب</td>
+                        <td class="p-3 text-emerald-400 text-xs">القسمة قبل المعالجة, لا تكرار المصادر</td>
+                    </tr>
+                    <tr>
+                        <td class="p-3"><span class="text-rose-300 font-bold">Noisy Labels</span><br><span class="text-gray-500 text-xs">تسميات خاطئة</span></td>
+                        <td class="p-3 text-gray-400">توصيف غير دقيق</td>
+                        <td class="p-3 text-emerald-400 text-xs">مراجعة التوصيف يدوياً</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ==================== QUICK REFERENCE ==================== -->
+    <section class="mb-12">
+        <div class="bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-pink-500/10 border border-white/10 rounded-2xl p-8">
+            <h2 class="text-2xl font-black mb-5 text-center">🎯 مرجع سريع <span class="mini-term">Quick Reference</span></h2>
+            <div class="grid md:grid-cols-2 gap-5">
+                <div>
+                    <h4 class="font-bold text-indigo-300 mb-3">مصطلحات أساسية <span class="mini-term">Key Terms</span></h4>
+                    <div class="space-y-2 text-sm text-gray-300">
+                        <p>🤖 <span class="mini-term">AI</span> — الذكاء الاصطناعي</p>
+                        <p>📚 <span class="mini-term">ML</span> — تعلم الآلة</p>
+                        <p>🔬 <span class="mini-term">DL</span> — التعلم العميق</p>
+                        <p>📷 <span class="mini-term">CNN</span> — الشبكات العصبية التلافيفية</p>
+                        <p>🎯 <span class="mini-term">YOLO</span> — نموذج كشف أجسام سريع</p>
+                        <p>📦 <span class="mini-term">Epoch</span> — دورة كاملة على البيانات</p>
+                        <p>📐 <span class="mini-term">IoU</span> — نسبة تطابق المربعات</p>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold text-indigo-300 mb-3">أدوات مجانية <span class="mini-term">Free Tools</span></h4>
+                    <div class="space-y-2 text-sm text-gray-300">
+                        <p>🧪 <a href="https://colab.research.google.com/" target="_blank" class="text-blue-400 underline">Google Colab</a> — تدريب بـ GPU مجاني</p>
+                        <p>📊 <a href="https://www.kaggle.com/datasets" target="_blank" class="text-blue-400 underline">Kaggle</a> — داتاسيت + بيئة تدريب</p>
+                        <p>🏷️ <a href="https://www.cvat.ai/" target="_blank" class="text-blue-400 underline">CVAT</a> — توصيف صور مجاني</p>
+                        <p>🖼️ <a href="https://universe.roboflow.com/" target="_blank" class="text-blue-400 underline">Roboflow</a> — داتاسيت + تدريب</p>
+                        <p>📖 <a href="https://docs.ultralytics.com/" target="_blank" class="text-blue-400 underline">Ultralytics Docs</a> — توثيق YOLOv8</p>
+                        <p>🧠 <a href="https://www.tensorflow.org/learn" target="_blank" class="text-blue-400 underline">TensorFlow</a> — دورة Google المجانية</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="text-center">
+        <p class="text-gray-400 mb-4">تريد التعمق أكثر؟ ارجع للفصول التفصيلية</p>
+        <div class="flex justify-center gap-3 flex-wrap">
+            <a href="01_ai_intro.html" class="bg-purple-500/10 border border-purple-500/30 text-purple-300 px-5 py-2 rounded-lg text-sm font-bold hover:bg-purple-500/20 transition">الفصل ١: الذكاء الاصطناعي</a>
+            <a href="02_datasets.html" class="bg-blue-500/10 border border-blue-500/30 text-blue-300 px-5 py-2 rounded-lg text-sm font-bold hover:bg-blue-500/20 transition">الفصل ٢: البيانات</a>
+            <a href="03_training.html" class="bg-teal-500/10 border border-teal-500/30 text-teal-300 px-5 py-2 rounded-lg text-sm font-bold hover:bg-teal-500/20 transition">الفصل ٣: التدريب</a>
+            <a href="04_evaluation.html" class="bg-amber-500/10 border border-amber-500/30 text-amber-300 px-5 py-2 rounded-lg text-sm font-bold hover:bg-amber-500/20 transition">الفصل ٤: التقييم</a>
+            <a href="05_problems.html" class="bg-rose-500/10 border border-rose-500/30 text-rose-300 px-5 py-2 rounded-lg text-sm font-bold hover:bg-rose-500/20 transition">الفصل ٥: المشاكل</a>
+        </div>
+    </div>
+</main>
+
+<footer class="border-t border-white/5 py-6 text-center text-gray-500 text-sm">
+    ملخص تعليمي مرجعي — AI Quick Reference Guide
+</footer>
+</body>
+</html>
