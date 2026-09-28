@@ -1,239 +1,88 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>الفصل الأول — ما هو الذكاء الاصطناعي؟ What is AI?</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="shared.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#FDF1DA">
+<title>الدرس 01 — افهم مشروع الـAI من Dataset إلى Prediction</title>
+<meta name="description" content="درس بصري مبسط يشرح دورة مشروع الذكاء الاصطناعي من المشكلة والبيانات حتى التدريب والتنبؤ وربط النموذج بالتطبيق.">
+<style>
+:root{--peach:#FDBAA1;--cream:#FDF1DA;--teal:#6DAFA2;--navy:#494B6D;--mauve:#A97B9E;--ink:#303247;--muted:#737589;--white:#fffdfa;--line:rgba(73,75,109,.14);--shadow:0 18px 55px rgba(73,75,109,.09)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(180deg,#fffdfa,var(--cream));color:var(--ink);font-family:"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.75}a{text-decoration:none;color:inherit}.shell{width:min(1180px,calc(100% - 40px));margin:auto}
+.top{position:sticky;top:0;z-index:50;background:rgba(255,253,249,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.topin{height:72px;display:flex;align-items:center;justify-content:space-between;gap:22px}.brand{display:flex;align-items:center;gap:11px;font-weight:900;color:var(--navy)}.logo{width:38px;height:38px;border-radius:13px;background:var(--navy);display:grid;place-items:center;color:white;font-size:13px}.lesson{font-size:14px;color:var(--muted)}.lesson b{color:var(--navy);margin-left:8px}
+.hero{padding:78px 0 48px}.heroGrid{display:grid;grid-template-columns:1.12fr .88fr;gap:36px;align-items:stretch}.eyebrow,.tag{display:inline-flex;border-radius:999px;font-size:13px;font-weight:900}.eyebrow{padding:7px 12px;background:rgba(109,175,162,.14);color:#477f75;margin-bottom:16px}h1{font-size:clamp(40px,5.6vw,72px);line-height:1.12;letter-spacing:-1.5px;color:var(--navy);margin:0 0 20px}.lead{font-size:19px;color:#67697b;max-width:760px;margin:0 0 28px}.actions,.toc{display:flex;gap:10px;flex-wrap:wrap}.btn{padding:12px 18px;border-radius:15px;font-weight:900}.primary{background:var(--navy);color:white}.ghost,.toc a{border:1px solid var(--line);background:rgba(255,255,255,.62);color:var(--navy)}.toc{margin-top:16px}.toc a{font-size:12px;padding:7px 10px;border-radius:999px}
+.heroCard,.card{background:rgba(255,253,249,.86);border:1px solid var(--line);box-shadow:var(--shadow)}.heroCard{border-radius:30px;padding:26px;overflow:hidden}.mini{font-size:12px;font-weight:800;color:var(--muted)}.bigFlow{display:grid;gap:11px;margin-top:18px}.flow{display:grid;grid-template-columns:1fr 34px 1fr;align-items:center;gap:7px}.box{min-height:70px;background:white;border:1px solid var(--line);border-radius:17px;padding:14px 16px;display:flex;flex-direction:column;justify-content:center}.box strong{color:var(--navy)}.box span{font-size:12px;color:var(--muted)}.box.model{background:var(--navy);border:0}.box.model strong,.box.model span{color:white}.arrow{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--cream);font-weight:900;color:var(--navy)}
+section{padding:50px 0;scroll-margin-top:90px}.head{display:grid;grid-template-columns:150px 1fr;gap:22px;margin-bottom:26px}.no{font-size:13px;font-weight:900;color:var(--mauve);padding-top:9px}h2{font-size:clamp(29px,4vw,47px);line-height:1.25;color:var(--navy);margin:0 0 8px}.head p{margin:0;color:var(--muted);font-size:17px;max-width:830px}
+.card{border-radius:25px}.steps{display:grid;grid-template-columns:repeat(7,1fr);gap:9px;padding:17px}.step{min-height:166px;padding:16px 14px;border:1px solid var(--line);border-radius:19px;background:white;display:flex;flex-direction:column;justify-content:space-between}.n{width:33px;height:33px;border-radius:10px;display:grid;place-items:center;color:white;background:var(--navy);font-weight:900}.step:nth-child(2) .n,.step:nth-child(6) .n{background:var(--mauve)}.step:nth-child(3) .n,.step:nth-child(7) .n{background:var(--teal)}.step:nth-child(4) .n{background:#d98f79}.step h3{font-size:16px;color:var(--navy);margin:20px 0 4px}.step p{margin:0;font-size:12px;color:var(--muted);line-height:1.6}.rule{margin-top:16px;background:var(--navy);color:white;border-radius:19px;padding:18px 21px;display:flex;align-items:center;justify-content:space-between;gap:18px}.rule strong{font-size:18px}.rule span{font-size:13px;opacity:.82}
+.terms{display:grid;grid-template-columns:repeat(6,1fr);gap:11px}.term{background:white;border:1px solid var(--line);border-radius:17px;padding:17px 12px;text-align:center}.term b{display:block;color:var(--navy);margin-bottom:2px}.term span{font-size:11px;color:var(--muted)}
+.types{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.type{padding:23px;position:relative;overflow:hidden}.tag{padding:5px 9px;margin-bottom:21px}.type h3{font-size:23px;color:var(--navy);margin:0 0 7px}.type p{color:var(--muted);margin:0 0 17px}.code{direction:ltr;text-align:left;background:#f7f4ef;border:1px solid rgba(73,75,109,.08);border-radius:14px;padding:12px 14px;font:12px/1.7 Consolas,monospace;color:#47495f}.network .tag{background:rgba(109,175,162,.16);color:#3f7d73}.vision .tag{background:rgba(253,186,161,.28);color:#a2604f}.audio .tag{background:rgba(169,123,158,.16);color:#825c77}
+.spot{display:grid;grid-template-columns:.88fr 1.12fr;gap:18px}.pad{padding:26px}.pad h3{font-size:27px;color:var(--navy);margin:0 0 8px}.pad p{color:var(--muted);margin:0}.xy{display:grid;grid-template-columns:1fr 70px 1fr;gap:12px;align-items:center;margin-top:19px}.xyb{padding:18px;border-radius:17px;text-align:center;background:white;border:1px solid var(--line)}.xyb b{font-size:28px;color:var(--navy);display:block}.xyb small{color:var(--muted)}.xya{text-align:center;font-size:26px;color:var(--mauve);font-weight:900}
+.table{overflow:auto;margin-top:8px;border:1px solid var(--line);border-radius:16px;background:white}table{width:100%;min-width:610px;border-collapse:collapse;direction:ltr;text-align:left;font-size:12px}th,td{padding:12px 13px;border-bottom:1px solid rgba(73,75,109,.08)}th{background:#faf5ec;color:var(--navy)}td:last-child,th:last-child{font-weight:900}.ok{color:#377e73}.attack{color:#9d6079}
+.sees{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.see{background:white;border:1px solid var(--line);border-radius:19px;padding:17px}.visual{height:112px;border-radius:15px;background:#f6f2ec;margin-bottom:13px;position:relative;overflow:hidden}.see h4{color:var(--navy);margin:0 0 5px}.see p{font-size:12px;color:var(--muted);margin:0}.bars{height:100%;display:flex;align-items:flex-end;justify-content:center;gap:8px;padding:17px}.bars i{display:block;width:17px;border-radius:7px 7px 2px 2px}.bars i:nth-child(1){height:28%;background:var(--teal)}.bars i:nth-child(2){height:62%;background:var(--navy)}.bars i:nth-child(3){height:44%;background:var(--peach)}.bars i:nth-child(4){height:78%;background:var(--mauve)}.bars i:nth-child(5){height:54%;background:var(--teal)}.imgv:before{content:"";position:absolute;width:70px;height:42px;border:3px solid var(--peach);left:22px;top:25px;border-radius:7px}.imgv:after{content:"CAR";position:absolute;left:25px;top:10px;color:#a2604f;font-size:10px;font-weight:900}.road{position:absolute;bottom:-12px;left:0;right:0;height:51px;background:var(--navy);transform:skewY(-4deg)}.wave{height:100%;display:flex;align-items:center;justify-content:center;gap:3px}.wave i{width:4px;border-radius:4px;background:var(--mauve)}
+.pipeline{display:grid;grid-template-columns:repeat(6,1fr);gap:11px}.pipe{padding:19px 12px;border-radius:18px;background:white;border:1px solid var(--line);text-align:center}.pipe b{display:block;color:var(--navy);font-size:14px}.pipe span{font-size:11px;color:var(--muted)}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:17px}.compare .card{padding:25px}.compare h3{color:var(--navy);margin:0 0 12px}.item{display:flex;gap:10px;padding:11px 0;border-bottom:1px solid rgba(73,75,109,.08)}.item:last-child{border:0}.dot{width:11px;height:11px;border-radius:50%;margin-top:7px;flex:0 0 auto}.training .dot{background:var(--teal)}.infer .dot{background:var(--mauve)}.item b{color:var(--navy);display:block}.item span{font-size:12px;color:var(--muted)}
+.check{background:linear-gradient(135deg,var(--navy),#5c6088);color:white;border-radius:30px;padding:39px;display:grid;grid-template-columns:.83fr 1.17fr;gap:28px;align-items:center}.check h2{color:white;font-size:38px}.check p{color:rgba(255,255,255,.77)}.qs{display:grid;grid-template-columns:1fr 1fr;gap:9px}.q{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);padding:12px 13px;border-radius:14px;font-size:13px}.q b{color:var(--peach);margin-left:4px}.next{padding:31px 0 82px}.next .card{padding:24px 28px;display:flex;justify-content:space-between;align-items:center;gap:22px}.next h3{margin:0;color:var(--navy)}.next p{margin:3px 0 0;color:var(--muted)}.badge{padding:8px 12px;border-radius:999px;background:rgba(169,123,158,.14);color:#825c77;font-size:12px;font-weight:900}.foot{border-top:1px solid var(--line);padding:20px 0 30px;color:var(--muted);font-size:12px}
+@media(max-width:980px){.heroGrid,.spot,.check{grid-template-columns:1fr}.steps{grid-template-columns:repeat(2,1fr)}.types{grid-template-columns:1fr}.terms{grid-template-columns:repeat(3,1fr)}.sees{grid-template-columns:1fr}.pipeline{grid-template-columns:repeat(2,1fr)}.head{grid-template-columns:1fr}.no{padding:0}}
+@media(max-width:620px){.shell{width:min(100% - 24px,1180px)}.hero{padding-top:40px}.flow{grid-template-columns:1fr}.arrow{margin:auto;transform:rotate(90deg)}.steps,.compare,.qs,.pipeline{grid-template-columns:1fr}.terms{grid-template-columns:repeat(2,1fr)}.check{padding:26px}.next .card{align-items:flex-start;flex-direction:column}h1{font-size:41px}.lead{font-size:16px}}
+</style>
 </head>
-<body class="bg-gray-950 text-white font-['Tajawal'] min-h-screen">
-<nav class="sticky top-0 z-50 bg-gray-950/80 backdrop-blur-xl border-b border-white/5">
-    <div class="max-w-7xl mx-auto px-8 py-3 flex items-center justify-between">
-        <a href="index.html" class="text-gray-400 hover:text-white transition">→ الرئيسية</a>
-        <span class="text-purple-400 font-bold">Chapter 1 — الفصل ١ من ٥</span>
-        <a href="02_datasets.html" class="text-purple-400 hover:text-purple-300 transition">الفصل التالي ←</a>
-    </div>
-</nav>
-<main class="max-w-7xl mx-auto px-8 py-14">
+<body>
+<header class="top"><div class="shell topin"><a class="brand" href="#top"><span class="logo">AI</span><span>AI Graduation Lab</span></a><div class="lesson"><b>الدرس 01</b>من البيانات إلى التنبؤ</div></div></header>
+<main id="top">
+<section class="hero"><div class="shell heroGrid">
+<div><div class="eyebrow">الدرس التأسيسي — مناسب لكل مشاريع الـAI</div><h1>افهم مشروع الـAI كاملًا<br>من Dataset إلى Prediction</h1><p class="lead">في هذا الدرس لن نحفظ خوارزميات. سنفهم الصورة الكاملة: ما المشكلة؟ ما البيانات؟ ماذا يدخل إلى النموذج؟ كيف يتعلم؟ وكيف يتحول في النهاية إلى نتيجة يستخدمها موقعك أو تطبيقك؟</p><div class="actions"><a class="btn primary" href="#journey">ابدأ المسار الكامل ←</a><a class="btn ghost" href="#examples">شاهد الأمثلة الثلاثة</a></div><nav class="toc"><a href="#journey">المسار</a><a href="#terms">المصطلحات</a><a href="#examples">أنواع البيانات</a><a href="#training">التدريب</a><a href="#checkpoint">اختبر فهمك</a></nav></div>
+<aside class="heroCard"><div class="mini">الفكرة التي سنكررها طوال الدورة</div><div class="bigFlow">
+<div class="flow"><div class="box"><strong>بيانات حقيقية</strong><span>Network / Image / Audio</span></div><div class="arrow">←</div><div class="box"><strong>تجهيز البيانات</strong><span>تنظيف + تنظيم + Features</span></div></div>
+<div class="flow"><div class="box model"><strong>ML / AI Model</strong><span>يتعلم النمط من الأمثلة</span></div><div class="arrow">←</div><div class="box"><strong>Training</strong><span>تعلم من Train وتحقق من Validation</span></div></div>
+<div class="flow"><div class="box"><strong>Prediction</strong><span>Normal / Attack / Car / Fake...</span></div><div class="arrow">←</div><div class="box"><strong>Application</strong><span>Web / Desktop / Mobile</span></div></div>
+</div></aside></div></section>
 
-    <div class="mb-14">
-        <div class="inline-flex items-center gap-2 bg-purple-500/10 border border-purple-500/20 rounded-full px-5 py-2 text-purple-300 mb-4">🧠 Chapter 1 — الفصل الأول</div>
-        <h1 class="text-4xl md:text-5xl font-black mb-5">ما هو الذكاء الاصطناعي؟ <span class="term">What is Artificial Intelligence?</span></h1>
-        <p class="text-gray-400 text-xl leading-9">تعرّف على مفهوم الذكاء الاصطناعي <span class="term">AI</span> وأنواعه الرئيسية مع أمثلة واقعية من حياتك اليومية ومن مشاريع حقيقية حول العالم.</p>
-    </div>
+<section id="journey"><div class="shell"><div class="head"><div class="no">01 — الصورة الكاملة</div><div><h2>كل مشروع AI تقريبًا يمر بنفس الرحلة</h2><p>قد تتغير البيانات والخوارزمية، لكن طريقة التفكير الأساسية تبقى ثابتة. هذه السلسلة هي العمود الفقري لكل الدروس القادمة.</p></div></div>
+<div class="card steps">
+<article class="step"><span class="n">1</span><div><h3>حدد المشكلة</h3><p>ما الشيء الذي نريد من النظام أن يعرفه أو يتنبأ به؟</p></div></article>
+<article class="step"><span class="n">2</span><div><h3>اجمع Dataset</h3><p>أمثلة حقيقية تمثل المشكلة التي نريد حلها.</p></div></article>
+<article class="step"><span class="n">3</span><div><h3>افهم البيانات</h3><p>ما الـSample؟ ما الـFeatures؟ وما الـTarget أو Label؟</p></div></article>
+<article class="step"><span class="n">4</span><div><h3>جهّز البيانات</h3><p>تنظيف، Encoding، Scaling أو تحويل مناسب حسب نوع البيانات.</p></div></article>
+<article class="step"><span class="n">5</span><div><h3>درّب Model</h3><p>النموذج يبحث عن أنماط تربط المدخلات بالنتيجة الصحيحة.</p></div></article>
+<article class="step"><span class="n">6</span><div><h3>قيّم النتيجة</h3><p>نختبره على بيانات لم يتعلم منها ونتأكد أنه لا يحفظ فقط.</p></div></article>
+<article class="step"><span class="n">7</span><div><h3>ادمجه بالتطبيق</h3><p>يرسل التطبيق بيانات جديدة ويستقبل Prediction من النموذج.</p></div></article>
+</div><div class="rule"><strong>قاعدة الدرس الأول</strong><span>المشروع لا يبدأ من اختيار Model؛ يبدأ من سؤال واضح وDataset تمثل هذا السؤال.</span></div></div></section>
 
-    <!-- 1. What is AI -->
-    <section class="mb-14">
-        <h2 class="text-3xl font-bold mb-5 text-purple-300">١. تعريف الذكاء الاصطناعي <span class="term">Artificial Intelligence — AI</span></h2>
-        <p class="text-gray-300 text-lg leading-9 mb-5">الذكاء الاصطناعي هو <strong>علم تعليم الكمبيوتر كيف يفكر ويتخذ قرارات بنفسه</strong> بدلاً من أن يُبرمَج لكل حالة يدوياً. الفكرة الأساسية: بدلاً من كتابة تعليمات صارمة، <strong>تعطيه أمثلة كثيرة ويستخرج القواعد بنفسه</strong>.</p>
+<section id="terms"><div class="shell"><div class="head"><div class="no">02 — اللغة الأساسية</div><div><h2>ستسمع هذه الكلمات في كل مشروع</h2><p>لا نحتاج تعريفات أكاديمية طويلة. نحتاج معنى عمليًا ثابتًا تستطيع رؤيته داخل Dataset أو Notebook.</p></div></div><div class="terms">
+<div class="term"><b>Dataset</b><span>مجموعة البيانات كاملة</span></div><div class="term"><b>Sample</b><span>مثال واحد من البيانات</span></div><div class="term"><b>Feature</b><span>معلومة تدخل إلى النموذج</span></div><div class="term"><b>Label / Target</b><span>الإجابة التي نريد تعلمها</span></div><div class="term"><b>Model</b><span>الخوارزمية بعد التعلم</span></div><div class="term"><b>Prediction</b><span>إجابة النموذج لبيانات جديدة</span></div>
+</div></div></section>
 
-        <div class="grid md:grid-cols-2 gap-5 mb-5">
-            <div class="bg-rose-500/5 border border-rose-500/20 rounded-2xl p-6">
-                <h4 class="font-bold text-rose-300 text-lg mb-3">❌ البرمجة التقليدية <span class="term">Traditional Programming</span></h4>
-                <p class="text-gray-300 leading-8">أنت تكتب القواعد يدوياً:</p>
-                <div class="bg-gray-900 rounded-xl p-4 mt-3 font-mono text-sm" dir="ltr">
-                    <span class="text-green-400">if</span> shape == "round" <span class="text-green-400">and</span> color == "red":<br>
-                    &nbsp;&nbsp;result = "تفاحة 🍎"<br>
-                    <span class="text-gray-500"># لكن ماذا لو كانت خضراء؟ أو صفراء؟</span>
-                </div>
-                <p class="text-gray-400 text-base mt-3">المشكلة: تحتاج كتابة قاعدة لكل حالة ممكنة — وهذا مستحيل في العالم الحقيقي!</p>
-            </div>
-            <div class="bg-emerald-500/5 border border-emerald-500/20 rounded-2xl p-6">
-                <h4 class="font-bold text-emerald-300 text-lg mb-3">✅ الذكاء الاصطناعي <span class="term">AI / Machine Learning</span></h4>
-                <p class="text-gray-300 leading-8">تعطيه بيانات <span class="term">Data</span> ويتعلم بنفسه:</p>
-                <div class="bg-gray-900 rounded-xl p-4 mt-3 font-mono text-sm" dir="ltr">
-                    <span class="text-green-400"># أعطيه 10,000 صورة تفاح متنوعة</span><br>
-                    model.train(images, labels)<br>
-                    <span class="text-green-400"># الآن يتعرف على أي تفاحة!</span>
-                </div>
-                <p class="text-gray-400 text-base mt-3">الحل: يتعلم الأنماط من الأمثلة ويعمّم على حالات جديدة لم يرها من قبل.</p>
-            </div>
-        </div>
+<section id="examples"><div class="shell"><div class="head"><div class="no">03 — أنواع Dataset</div><div><h2>Dataset ليست دائمًا ملف Excel</h2><p>سنستخدم ثلاثة أمثلة طوال الدرس. الفكرة واحدة، لكن شكل الـSample والـFeatures يختلف حسب نوع البيانات.</p></div></div><div class="types">
+<article class="card type network"><span class="tag">NETWORK / TABULAR</span><h3>حركة الشبكة</h3><p>كل صف يمثل Network Flow. الأعمدة أرقام وخصائص مثل مدة الاتصال، عدد الحزم والبورت.</p><div class="code">Flow Duration · Protocol · Packets · Bytes → <b>Label</b></div></article>
+<article class="card type vision"><span class="tag">IMAGE / DETECTION</span><h3>كشف مركبة في صورة</h3><p>الـSample هنا صورة، ومعها Class وموقع الكائن داخل الصورة إذا كان المشروع Object Detection.</p><div class="code">image_001.jpg + Bounding Box → <b>Car</b></div></article>
+<article class="card type audio"><span class="tag">AUDIO / CLASSIFICATION</span><h3>صوت حقيقي أو مزيف</h3><p>الـSample ملف صوتي. يمكن تحويله إلى تمثيل مثل Spectrogram ثم يتعلم النموذج التمييز.</p><div class="code">voice_014.wav → Features → <b>Real / Fake</b></div></article>
+</div></div></section>
 
-        <div class="example-box">
-            <p class="text-gray-300 leading-9 text-lg"><strong>مثال من الحياة:</strong> كيف تعلمت أنت التفريق بين القطة والكلب؟ لم يعطك أحد قواعد رياضية — بل رأيت مئات القطط والكلاب في حياتك، وعقلك استخرج الأنماط تلقائياً (شكل الأذن، حجم الأنف، طريقة المشي). <strong>الذكاء الاصطناعي يفعل نفس الشيء بالضبط!</strong></p>
-        </div>
-    </section>
+<section><div class="shell"><div class="head"><div class="no">04 — مثال ملموس</div><div><h2>لنقرأ Dataset شبكة كأنها جدول عادي</h2><p>هذه أول مهارة يحتاجها الطالب: أن ينظر للبيانات ويعرف ما الذي يدخل للنموذج وما الذي يُطلب منه أن يتعلمه.</p></div></div><div class="spot">
+<div class="card pad"><h3>كل صف = Sample واحد</h3><p>هنا كل صف يمثل اتصالًا أو Flow داخل الشبكة. معظم الأعمدة Features، والعمود الأخير هو Label.</p><div class="xy"><div class="xyb"><b>X</b><small>Features<br>المدخلات</small></div><div class="xya">→</div><div class="xyb"><b>y</b><small>Target<br>الإجابة</small></div></div></div>
+<div class="card pad"><div class="table"><table><thead><tr><th>Flow Duration</th><th>Protocol</th><th>Packets</th><th>Bytes</th><th>Dst Port</th><th>Label</th></tr></thead><tbody><tr><td>2.34</td><td>TCP</td><td>24</td><td>18,200</td><td>443</td><td class="ok">Normal</td></tr><tr><td>0.40</td><td>TCP</td><td>340</td><td>95,500</td><td>80</td><td class="attack">Attack</td></tr><tr><td>4.12</td><td>UDP</td><td>18</td><td>8,420</td><td>53</td><td class="ok">Normal</td></tr><tr><td>0.19</td><td>TCP</td><td>610</td><td>181,220</td><td>22</td><td class="attack">Attack</td></tr></tbody></table></div></div>
+</div></div></section>
 
-    <!-- 2. AI Tree -->
-    <section class="mb-14">
-        <h2 class="text-3xl font-bold mb-5 text-purple-300">٢. شجرة الذكاء الاصطناعي <span class="term">AI Hierarchy</span></h2>
-        <p class="text-gray-300 text-lg leading-9 mb-6">الذكاء الاصطناعي مظلة كبيرة تحتها عدة فروع متداخلة. كل فرع أكثر تخصصاً من الذي فوقه:</p>
+<section><div class="shell"><div class="head"><div class="no">05 — ماذا يرى النموذج؟</div><div><h2>النموذج لا “يفهم” البيانات مثل الإنسان</h2><p>نحن نحول كل نوع من البيانات إلى تمثيل رقمي مناسب، ثم يتعلم النموذج الأنماط الموجودة داخل هذا التمثيل.</p></div></div><div class="sees">
+<article class="see"><div class="visual"><div class="bars"><i></i><i></i><i></i><i></i><i></i></div></div><h4>Tabular</h4><p>مجموعة قيم وخصائص رقمية أو فئوية بعد تجهيزها.</p></article>
+<article class="see"><div class="visual imgv"><div class="road"></div></div><h4>Image</h4><p>Pixels وأنماط بصرية، أو كائنات ومواقعها في Detection.</p></article>
+<article class="see"><div class="visual"><div class="wave"><i style="height:22px"></i><i style="height:48px"></i><i style="height:70px"></i><i style="height:35px"></i><i style="height:82px"></i><i style="height:58px"></i><i style="height:28px"></i><i style="height:64px"></i><i style="height:42px"></i><i style="height:76px"></i><i style="height:32px"></i></div></div><h4>Audio</h4><p>Waveform أو Spectrogram أو Features صوتية رقمية.</p></article>
+</div></div></section>
 
-        <!-- Diagram -->
-        <div class="rounded-2xl overflow-hidden border border-white/10 mb-6">
-            <img src="assets/images/ai_ml_dl_simple.png" alt="AI ML DL Hierarchy Diagram" class="w-full object-contain max-h-80">
-            <p class="text-center text-gray-500 text-sm py-3 bg-white/5">📊 مخطط توضيحي — العلاقة بين الذكاء الاصطناعي وتعلم الآلة والتعلم العميق <span class="term">AI → ML → DL Hierarchy</span></p>
-        </div>
+<section id="training"><div class="shell"><div class="head"><div class="no">06 — من Dataset إلى Model</div><div><h2>ما الذي يحدث أثناء التدريب؟</h2><p>في هذا الدرس يكفينا فهم التسلسل. تفاصيل التقسيم والتنظيف والتقييم ستأتي في دروس مستقلة.</p></div></div><div class="pipeline">
+<div class="pipe"><b>Dataset</b><span>البيانات الأصلية</span></div><div class="pipe"><b>Split</b><span>Train / Validation / Test</span></div><div class="pipe"><b>Preprocessing</b><span>تجهيز المدخلات</span></div><div class="pipe"><b>Training</b><span>النموذج يتعلم</span></div><div class="pipe"><b>Evaluation</b><span>اختبار على بيانات منفصلة</span></div><div class="pipe"><b>Saved Model</b><span>ملف جاهز للتطبيق</span></div>
+</div></div></section>
 
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-8 mb-6 text-center">
-            <div class="inline-block bg-purple-500/20 border border-purple-500/30 rounded-xl px-8 py-4 text-purple-300 font-bold text-lg mb-4">🧠 الذكاء الاصطناعي <span class="term">AI</span></div>
-            <div class="text-gray-500 text-3xl mb-4">↓</div>
-            <div class="inline-block bg-blue-500/20 border border-blue-500/30 rounded-xl px-8 py-4 text-blue-300 font-bold text-lg mb-4">📚 تعلّم الآلة <span class="term">Machine Learning</span></div>
-            <div class="text-gray-500 text-3xl mb-4">↓</div>
-            <div class="inline-block bg-teal-500/20 border border-teal-500/30 rounded-xl px-8 py-4 text-teal-300 font-bold text-lg mb-4">🔬 التعلّم العميق <span class="term">Deep Learning</span></div>
-            <div class="text-gray-500 text-3xl mb-4">↓</div>
-            <div class="flex flex-wrap justify-center gap-4">
-                <div class="bg-amber-500/20 border border-amber-500/30 rounded-xl px-5 py-3 text-amber-300 font-bold">تصنيف الصور <span class="term">Classification</span></div>
-                <div class="bg-rose-500/20 border border-rose-500/30 rounded-xl px-5 py-3 text-rose-300 font-bold">كشف الأجسام <span class="term">Object Detection</span></div>
-                <div class="bg-green-500/20 border border-green-500/30 rounded-xl px-5 py-3 text-green-300 font-bold">معالجة اللغة <span class="term">NLP</span></div>
-                <div class="bg-cyan-500/20 border border-cyan-500/30 rounded-xl px-5 py-3 text-cyan-300 font-bold">توليد الصور <span class="term">Image Generation</span></div>
-            </div>
-        </div>
-    </section>
+<section><div class="shell"><div class="head"><div class="no">07 — بعد التدريب</div><div><h2>كيف يدخل الـAI داخل التطبيق؟</h2><p>التطبيق لا يعيد تدريب النموذج كل مرة. غالبًا يستخدم Model محفوظًا ليستقبل بيانات جديدة ويعيد Prediction.</p></div></div><div class="compare">
+<div class="card training"><h3>وقت التدريب — Training</h3><div class="item"><span class="dot"></span><div><b>يحتاج Dataset</b><span>يتعلم من عدد كبير من الأمثلة.</span></div></div><div class="item"><span class="dot"></span><div><b>يحدث قبل تشغيل النظام</b><span>داخل Notebook أو بيئة تدريب.</span></div></div><div class="item"><span class="dot"></span><div><b>النتيجة Model محفوظ</b><span>نستخدمه لاحقًا داخل النظام.</span></div></div></div>
+<div class="card infer"><h3>وقت الاستخدام — Inference</h3><div class="item"><span class="dot"></span><div><b>يدخل Sample جديد</b><span>Flow جديد، صورة جديدة، أو صوت جديد.</span></div></div><div class="item"><span class="dot"></span><div><b>النموذج لا يتعلم هنا</b><span>فقط يطبّق ما تعلمه سابقًا.</span></div></div><div class="item"><span class="dot"></span><div><b>يعيد Prediction</b><span>مثلاً Normal / Attack أو Real / Fake.</span></div></div></div>
+</div></div></section>
 
-    <!-- 3. Machine Learning -->
-    <section class="mb-14">
-        <h2 class="text-3xl font-bold mb-5 text-purple-300">٣. تعلّم الآلة <span class="term">Machine Learning — ML</span></h2>
-        <p class="text-gray-300 text-lg leading-9 mb-6">هو الفرع الأهم من الذكاء الاصطناعي. الفكرة: <strong>الكمبيوتر يتعلم من البيانات <span class="term">Data</span> بدون برمجته مباشرة</strong>. تعطيه أمثلة ← يستخرج الأنماط <span class="term">Patterns</span> ← يتنبأ بحالات جديدة.</p>
+<section id="checkpoint"><div class="shell"><div class="check"><div><div class="mini" style="color:var(--peach)">نهاية الدرس 01</div><h2>إذا فهمت هذه الأسئلة فأنت فهمت هيكل مشروعك</h2><p>لا تحفظ الإجابات. افتح Dataset مشروعك وحاول أن تجيب عنها بنفسك. الدروس القادمة ستفكك كل سؤال بالتفصيل.</p></div><div class="qs">
+<div class="q"><b>1</b>ما المشكلة التي يحلها الـAI؟</div><div class="q"><b>2</b>ما الذي يمثله Sample واحد؟</div><div class="q"><b>3</b>ما الـFeatures التي تدخل للنموذج؟</div><div class="q"><b>4</b>ما الـLabel أو Target؟</div><div class="q"><b>5</b>كيف ستصل البيانات إلى Model؟</div><div class="q"><b>6</b>كيف نعرف أن Model جيد فعلًا؟</div><div class="q"><b>7</b>ماذا سيستقبل التطبيق وماذا سيعيد؟</div><div class="q"><b>✓</b>هذه هي الخريطة التي سنبني عليها بقية الدورة.</div>
+</div></div></div></section>
 
-        <h3 class="text-2xl font-bold mb-5 text-gray-200">أنواع تعلّم الآلة <span class="term">Types of Machine Learning</span>:</h3>
-        <div class="grid md:grid-cols-3 gap-5 mb-6">
-            <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
-                <div class="text-3xl mb-3">📖</div>
-                <h4 class="font-bold text-lg mb-3">تعلّم بإشراف <span class="term">Supervised Learning</span></h4>
-                <p class="text-gray-300 leading-8 mb-3">تعطي النموذج <span class="term">Model</span> بيانات <strong>مع الإجابة الصحيحة <span class="term">Labels</span></strong>. يتعلم العلاقة بين المدخل والمخرج.</p>
-                <div class="example-box">
-                    <p class="text-gray-300 leading-8"><strong>مثال:</strong> تعطي نظاماً طبياً آلاف صور الأشعة مع تشخيص الطبيب (ورم / سليم). يتعلم التفريق بنفسه ويشخّص صور جديدة.</p>
-                </div>
-                <p class="text-purple-400 text-sm mt-2">📌 هذا النوع الأكثر استخداماً — ومعظم مشاريع الكشف والتصنيف تستخدمه.</p>
-            </div>
-            <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
-                <div class="text-3xl mb-3">🔍</div>
-                <h4 class="font-bold text-lg mb-3">تعلّم بدون إشراف <span class="term">Unsupervised Learning</span></h4>
-                <p class="text-gray-300 leading-8 mb-3">تعطيه بيانات <strong>بدون إجابات</strong>. يكتشف الأنماط والتجمعات <span class="term">Clusters</span> بنفسه.</p>
-                <div class="example-box">
-                    <p class="text-gray-300 leading-8"><strong>مثال:</strong> متجر إلكتروني يعطي النظام بيانات شراء ملايين العملاء. النظام يجمّعهم تلقائياً: "عملاء يحبون الرياضة"، "عملاء يحبون التقنية".</p>
-                </div>
-            </div>
-            <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
-                <div class="text-3xl mb-3">🎮</div>
-                <h4 class="font-bold text-lg mb-3">تعلّم معزّز <span class="term">Reinforcement Learning — RL</span></h4>
-                <p class="text-gray-300 leading-8 mb-3">يتعلم بـ<strong>المحاولة والخطأ <span class="term">Trial & Error</span></strong>. يحصل على مكافأة <span class="term">Reward</span> عند النجاح وعقوبة <span class="term">Penalty</span> عند الفشل.</p>
-                <div class="example-box">
-                    <p class="text-gray-300 leading-8"><strong>مثال:</strong> نظام AlphaGo من Google تعلّم لعبة Go بلعب ملايين المباريات ضد نفسه — وهزم بطل العالم!</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. Deep Learning -->
-    <section class="mb-14">
-        <h2 class="text-3xl font-bold mb-5 text-purple-300">٤. التعلّم العميق <span class="term">Deep Learning — DL</span></h2>
-        <p class="text-gray-300 text-lg leading-9 mb-5">فرع متقدم من تعلّم الآلة يستخدم <strong>شبكات عصبية اصطناعية <span class="term">Artificial Neural Networks</span></strong> مستوحاة من الدماغ البشري. تتكون من <strong>طبقات متعددة <span class="term">Layers</span></strong> (لذلك اسمه "عميق" — أي طبقات عميقة).</p>
-
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-7 mb-5">
-            <h4 class="font-bold text-lg mb-4">كيف تعمل الشبكة العصبية <span class="term">Neural Network</span>؟</h4>
-            <div class="flex flex-wrap justify-center items-center gap-3 text-base mb-4">
-                <span class="bg-blue-500/20 border border-blue-500/30 text-blue-300 px-5 py-3 rounded-xl font-bold">📷 طبقة الإدخال<br><span class="term">Input Layer</span></span>
-                <span class="text-gray-500 text-2xl">→</span>
-                <span class="bg-purple-500/20 border border-purple-500/30 text-purple-300 px-5 py-3 rounded-xl font-bold">🔮 طبقات مخفية<br><span class="term">Hidden Layers</span></span>
-                <span class="text-gray-500 text-2xl">→</span>
-                <span class="bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 px-5 py-3 rounded-xl font-bold">🎯 طبقة المخرج<br><span class="term">Output Layer</span></span>
-            </div>
-            <div class="example-box">
-                <p class="text-gray-300 leading-9 text-lg"><strong>مثال تخيّلي:</strong> تخيل أنك تنظر لصورة سيارة. عينك (طبقة الإدخال) ترى البكسلات ← الطبقة الأولى في دماغك تلاحظ الخطوط والزوايا ← الطبقة الثانية تتعرف على الأشكال (دائرة = إطار) ← الطبقة الثالثة تجمع كل شيء وتقول: "سيارة!" — هذا بالضبط ما تفعله الشبكة العصبية.</p>
-            </div>
-        </div>
-
-        <div class="link-box">
-            <p class="text-gray-300 leading-8">🎥 <a href="https://www.youtube.com/watch?v=aircAruvnKk" target="_blank">شرح مرئي رائع للشبكات العصبية — 3Blue1Brown (إنجليزي)</a></p>
-            <p class="text-gray-300 leading-8">📖 <a href="https://www.tensorflow.org/learn" target="_blank">دورة TensorFlow المجانية من Google</a></p>
-        </div>
-    </section>
-
-    <!-- 5. Object Detection vs Classification -->
-    <section class="mb-14">
-        <h2 class="text-3xl font-bold mb-5 text-purple-300">٥. التصنيف مقابل كشف الأجسام <span class="term">Classification vs Object Detection</span></h2>
-        <div class="grid md:grid-cols-2 gap-5 mb-5">
-            <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
-                <h4 class="font-bold text-amber-300 text-lg mb-3">🏷️ تصنيف الصور <span class="term">Image Classification</span></h4>
-                <p class="text-gray-300 leading-8 mb-3">يجيب على سؤال واحد: <strong>"ماذا يوجد في هذه الصورة؟"</strong></p>
-                <p class="text-gray-400 mb-3">المخرج <span class="term">Output</span>: تسمية واحدة للصورة كلها</p>
-                <div class="bg-gray-900 rounded-xl p-4 text-center">
-                    <div class="text-4xl mb-2">🐱</div>
-                    <div class="text-amber-300 font-bold">→ "قطة" (95% ثقة)</div>
-                </div>
-                <div class="example-box">
-                    <p class="text-gray-300 leading-8">تطبيق Google Lens: تصوّر نبتة ← يقول لك "وردة جورية".</p>
-                </div>
-            </div>
-            <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
-                <h4 class="font-bold text-rose-300 text-lg mb-3">📍 كشف الأجسام <span class="term">Object Detection</span></h4>
-                <p class="text-gray-300 leading-8 mb-3">يجيب على: <strong>"ماذا يوجد وأين بالضبط في الصورة؟"</strong></p>
-                <p class="text-gray-400 mb-3">المخرج <span class="term">Output</span>: عدة مربعات <span class="term">Bounding Boxes</span> + تسميات</p>
-                <div class="bg-gray-900 rounded-xl p-4 text-center">
-                    <div class="text-4xl mb-2">🚗👤🚦</div>
-                    <div class="text-rose-300 font-bold">→ سيارة (هنا) + شخص (هنا) + إشارة (هنا)</div>
-                </div>
-                <div class="example-box">
-                    <p class="text-gray-300 leading-8">نظام السيارة ذاتية القيادة: يحدد كل شيء في الطريق ومكانه بالضبط في نفس اللحظة.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 6. YOLO -->
-    <section class="mb-14">
-        <h2 class="text-3xl font-bold mb-5 text-purple-300">٦. ما هو YOLO؟ <span class="term">You Only Look Once</span></h2>
-        <p class="text-gray-300 text-lg leading-9 mb-5">YOLO هو أحد أشهر نماذج كشف الأجسام <span class="term">Object Detection Models</span>. الاسم يعني <strong>"تنظر مرة واحدة فقط"</strong> — النموذج يحلل الصورة كاملة <strong>في مرور واحد</strong> بدلاً من فحص كل جزء على حدة، مما يجعله <strong>سريعاً جداً <span class="term">Real-time</span></strong>.</p>
-
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-6 mb-5">
-            <h4 class="font-bold text-lg mb-4">إصدارات YOLO عبر السنوات <span class="term">YOLO Versions</span>:</h4>
-            <div class="flex flex-wrap gap-3">
-                <span class="bg-gray-800 px-4 py-2 rounded-lg text-gray-400">YOLOv1 <span class="text-gray-600">(2015)</span></span>
-                <span class="bg-gray-800 px-4 py-2 rounded-lg text-gray-400">YOLOv3 <span class="text-gray-600">(2018)</span></span>
-                <span class="bg-gray-800 px-4 py-2 rounded-lg text-gray-400">YOLOv5 <span class="text-gray-600">(2020)</span></span>
-                <span class="bg-purple-500/20 px-4 py-2 rounded-lg text-purple-300 font-bold border border-purple-500/30">YOLOv8 <span class="text-purple-400">(2023)</span></span>
-                <span class="bg-gray-800 px-4 py-2 rounded-lg text-gray-400">YOLOv11 <span class="text-gray-600">(2024)</span></span>
-            </div>
-            <p class="text-gray-400 mt-4">كل إصدار أسرع وأدق من السابق. YOLOv8 من شركة <span class="term">Ultralytics</span> ويدعم الكشف والتصنيف والتقسيم <span class="term">Segmentation</span> في نموذج واحد.</p>
-        </div>
-
-        <div class="link-box">
-            <p class="text-gray-300 leading-8">📖 <a href="https://docs.ultralytics.com/" target="_blank">التوثيق الرسمي لـ Ultralytics YOLOv8</a></p>
-            <p class="text-gray-300 leading-8">🧪 <a href="https://colab.research.google.com/" target="_blank">Google Colab — بيئة تدريب مجانية بـ GPU</a></p>
-            <p class="text-gray-300 leading-8">📊 <a href="https://universe.roboflow.com/" target="_blank">Roboflow Universe — آلاف الداتاسيت الجاهزة للتدريب</a></p>
-        </div>
-    </section>
-
-    <!-- 7. AI Examples -->
-    <section class="mb-14">
-        <h2 class="text-3xl font-bold mb-5 text-purple-300">٧. أمثلة على الذكاء الاصطناعي في الحياة <span class="term">Real-world AI Examples</span></h2>
-        <div class="grid md:grid-cols-2 gap-4">
-            <div class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-xl px-6 py-5">
-                <span class="text-3xl">📱</span>
-                <div><strong class="text-white text-lg">فتح الهاتف بالوجه <span class="term">Face Recognition</span></strong><p class="text-gray-400">يستخدم كشف الأجسام + تصنيف الوجوه</p></div>
-            </div>
-            <div class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-xl px-6 py-5">
-                <span class="text-3xl">🗣️</span>
-                <div><strong class="text-white text-lg">المساعد الصوتي <span class="term">Voice Assistant (NLP)</span></strong><p class="text-gray-400">Siri, Google Assistant — معالجة لغة طبيعية</p></div>
-            </div>
-            <div class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-xl px-6 py-5">
-                <span class="text-3xl">🚗</span>
-                <div><strong class="text-white text-lg">السيارة ذاتية القيادة <span class="term">Self-driving Cars</span></strong><p class="text-gray-400">Tesla Autopilot — كشف أجسام + تعلم معزز</p></div>
-            </div>
-            <div class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-xl px-6 py-5">
-                <span class="text-3xl">🏥</span>
-                <div><strong class="text-white text-lg">تشخيص الأمراض <span class="term">Medical Diagnosis</span></strong><p class="text-gray-400">تحليل صور الأشعة للكشف عن الأورام</p></div>
-            </div>
-            <div class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-xl px-6 py-5">
-                <span class="text-3xl">🎨</span>
-                <div><strong class="text-white text-lg">توليد الصور <span class="term">Image Generation (DALL-E, Midjourney)</span></strong><p class="text-gray-400">إنشاء صور من وصف نصي</p></div>
-            </div>
-            <div class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-xl px-6 py-5">
-                <span class="text-3xl">💬</span>
-                <div><strong class="text-white text-lg">الدردشة الذكية <span class="term">Chatbots (ChatGPT, Gemini)</span></strong><p class="text-gray-400">نماذج لغوية كبيرة <span class="term">LLMs</span></p></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Navigation -->
-    <div class="flex justify-between items-center border-t border-white/10 pt-8">
-        <a href="index.html" class="text-gray-400 hover:text-white transition text-lg">→ الرئيسية</a>
-        <a href="02_datasets.html" class="bg-blue-500/10 border border-blue-500/30 text-blue-300 px-8 py-4 rounded-xl font-bold hover:bg-blue-500/20 transition text-lg">الفصل التالي: البيانات والداتاسيت ←</a>
-    </div>
+<div class="next"><div class="shell"><div class="card"><div><h3>الدرس التالي: Dataset — Rows, Features, Labels & Target</h3><p>سنفتح أنواع بيانات مختلفة ونشرح كيف تقرأ كل Dataset وتحدد نوع مشروعك منها.</p></div><span class="badge">قريبًا — Lesson 02</span></div></div></div>
 </main>
-</body>
-</html>
+<footer class="foot"><div class="shell">AI Graduation Lab — Lesson 01 • صفحة تعليمية مصممة للتسجيل والشرح المباشر.</div></footer>
+</body></html>
