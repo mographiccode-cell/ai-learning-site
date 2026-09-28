@@ -1,107 +1,88 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دليل الذكاء الاصطناعي وتدريب البيانات — شرح شامل للمبتدئين</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="shared.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#FDF1DA">
+<title>الدرس 01 — افهم مشروع الـAI من Dataset إلى Prediction</title>
+<meta name="description" content="درس بصري مبسط يشرح دورة مشروع الذكاء الاصطناعي من المشكلة والبيانات حتى التدريب والتنبؤ وربط النموذج بالتطبيق.">
+<style>
+:root{--peach:#FDBAA1;--cream:#FDF1DA;--teal:#6DAFA2;--navy:#494B6D;--mauve:#A97B9E;--ink:#303247;--muted:#737589;--white:#fffdfa;--line:rgba(73,75,109,.14);--shadow:0 18px 55px rgba(73,75,109,.09)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(180deg,#fffdfa,var(--cream));color:var(--ink);font-family:"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.75}a{text-decoration:none;color:inherit}.shell{width:min(1180px,calc(100% - 40px));margin:auto}
+.top{position:sticky;top:0;z-index:50;background:rgba(255,253,249,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.topin{height:72px;display:flex;align-items:center;justify-content:space-between;gap:22px}.brand{display:flex;align-items:center;gap:11px;font-weight:900;color:var(--navy)}.logo{width:38px;height:38px;border-radius:13px;background:var(--navy);display:grid;place-items:center;color:white;font-size:13px}.lesson{font-size:14px;color:var(--muted)}.lesson b{color:var(--navy);margin-left:8px}
+.hero{padding:78px 0 48px}.heroGrid{display:grid;grid-template-columns:1.12fr .88fr;gap:36px;align-items:stretch}.eyebrow,.tag{display:inline-flex;border-radius:999px;font-size:13px;font-weight:900}.eyebrow{padding:7px 12px;background:rgba(109,175,162,.14);color:#477f75;margin-bottom:16px}h1{font-size:clamp(40px,5.6vw,72px);line-height:1.12;letter-spacing:-1.5px;color:var(--navy);margin:0 0 20px}.lead{font-size:19px;color:#67697b;max-width:760px;margin:0 0 28px}.actions,.toc{display:flex;gap:10px;flex-wrap:wrap}.btn{padding:12px 18px;border-radius:15px;font-weight:900}.primary{background:var(--navy);color:white}.ghost,.toc a{border:1px solid var(--line);background:rgba(255,255,255,.62);color:var(--navy)}.toc{margin-top:16px}.toc a{font-size:12px;padding:7px 10px;border-radius:999px}
+.heroCard,.card{background:rgba(255,253,249,.86);border:1px solid var(--line);box-shadow:var(--shadow)}.heroCard{border-radius:30px;padding:26px;overflow:hidden}.mini{font-size:12px;font-weight:800;color:var(--muted)}.bigFlow{display:grid;gap:11px;margin-top:18px}.flow{display:grid;grid-template-columns:1fr 34px 1fr;align-items:center;gap:7px}.box{min-height:70px;background:white;border:1px solid var(--line);border-radius:17px;padding:14px 16px;display:flex;flex-direction:column;justify-content:center}.box strong{color:var(--navy)}.box span{font-size:12px;color:var(--muted)}.box.model{background:var(--navy);border:0}.box.model strong,.box.model span{color:white}.arrow{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--cream);font-weight:900;color:var(--navy)}
+section{padding:50px 0;scroll-margin-top:90px}.head{display:grid;grid-template-columns:150px 1fr;gap:22px;margin-bottom:26px}.no{font-size:13px;font-weight:900;color:var(--mauve);padding-top:9px}h2{font-size:clamp(29px,4vw,47px);line-height:1.25;color:var(--navy);margin:0 0 8px}.head p{margin:0;color:var(--muted);font-size:17px;max-width:830px}
+.card{border-radius:25px}.steps{display:grid;grid-template-columns:repeat(7,1fr);gap:9px;padding:17px}.step{min-height:166px;padding:16px 14px;border:1px solid var(--line);border-radius:19px;background:white;display:flex;flex-direction:column;justify-content:space-between}.n{width:33px;height:33px;border-radius:10px;display:grid;place-items:center;color:white;background:var(--navy);font-weight:900}.step:nth-child(2) .n,.step:nth-child(6) .n{background:var(--mauve)}.step:nth-child(3) .n,.step:nth-child(7) .n{background:var(--teal)}.step:nth-child(4) .n{background:#d98f79}.step h3{font-size:16px;color:var(--navy);margin:20px 0 4px}.step p{margin:0;font-size:12px;color:var(--muted);line-height:1.6}.rule{margin-top:16px;background:var(--navy);color:white;border-radius:19px;padding:18px 21px;display:flex;align-items:center;justify-content:space-between;gap:18px}.rule strong{font-size:18px}.rule span{font-size:13px;opacity:.82}
+.terms{display:grid;grid-template-columns:repeat(6,1fr);gap:11px}.term{background:white;border:1px solid var(--line);border-radius:17px;padding:17px 12px;text-align:center}.term b{display:block;color:var(--navy);margin-bottom:2px}.term span{font-size:11px;color:var(--muted)}
+.types{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.type{padding:23px;position:relative;overflow:hidden}.tag{padding:5px 9px;margin-bottom:21px}.type h3{font-size:23px;color:var(--navy);margin:0 0 7px}.type p{color:var(--muted);margin:0 0 17px}.code{direction:ltr;text-align:left;background:#f7f4ef;border:1px solid rgba(73,75,109,.08);border-radius:14px;padding:12px 14px;font:12px/1.7 Consolas,monospace;color:#47495f}.network .tag{background:rgba(109,175,162,.16);color:#3f7d73}.vision .tag{background:rgba(253,186,161,.28);color:#a2604f}.audio .tag{background:rgba(169,123,158,.16);color:#825c77}
+.spot{display:grid;grid-template-columns:.88fr 1.12fr;gap:18px}.pad{padding:26px}.pad h3{font-size:27px;color:var(--navy);margin:0 0 8px}.pad p{color:var(--muted);margin:0}.xy{display:grid;grid-template-columns:1fr 70px 1fr;gap:12px;align-items:center;margin-top:19px}.xyb{padding:18px;border-radius:17px;text-align:center;background:white;border:1px solid var(--line)}.xyb b{font-size:28px;color:var(--navy);display:block}.xyb small{color:var(--muted)}.xya{text-align:center;font-size:26px;color:var(--mauve);font-weight:900}
+.table{overflow:auto;margin-top:8px;border:1px solid var(--line);border-radius:16px;background:white}table{width:100%;min-width:610px;border-collapse:collapse;direction:ltr;text-align:left;font-size:12px}th,td{padding:12px 13px;border-bottom:1px solid rgba(73,75,109,.08)}th{background:#faf5ec;color:var(--navy)}td:last-child,th:last-child{font-weight:900}.ok{color:#377e73}.attack{color:#9d6079}
+.sees{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.see{background:white;border:1px solid var(--line);border-radius:19px;padding:17px}.visual{height:112px;border-radius:15px;background:#f6f2ec;margin-bottom:13px;position:relative;overflow:hidden}.see h4{color:var(--navy);margin:0 0 5px}.see p{font-size:12px;color:var(--muted);margin:0}.bars{height:100%;display:flex;align-items:flex-end;justify-content:center;gap:8px;padding:17px}.bars i{display:block;width:17px;border-radius:7px 7px 2px 2px}.bars i:nth-child(1){height:28%;background:var(--teal)}.bars i:nth-child(2){height:62%;background:var(--navy)}.bars i:nth-child(3){height:44%;background:var(--peach)}.bars i:nth-child(4){height:78%;background:var(--mauve)}.bars i:nth-child(5){height:54%;background:var(--teal)}.imgv:before{content:"";position:absolute;width:70px;height:42px;border:3px solid var(--peach);left:22px;top:25px;border-radius:7px}.imgv:after{content:"CAR";position:absolute;left:25px;top:10px;color:#a2604f;font-size:10px;font-weight:900}.road{position:absolute;bottom:-12px;left:0;right:0;height:51px;background:var(--navy);transform:skewY(-4deg)}.wave{height:100%;display:flex;align-items:center;justify-content:center;gap:3px}.wave i{width:4px;border-radius:4px;background:var(--mauve)}
+.pipeline{display:grid;grid-template-columns:repeat(6,1fr);gap:11px}.pipe{padding:19px 12px;border-radius:18px;background:white;border:1px solid var(--line);text-align:center}.pipe b{display:block;color:var(--navy);font-size:14px}.pipe span{font-size:11px;color:var(--muted)}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:17px}.compare .card{padding:25px}.compare h3{color:var(--navy);margin:0 0 12px}.item{display:flex;gap:10px;padding:11px 0;border-bottom:1px solid rgba(73,75,109,.08)}.item:last-child{border:0}.dot{width:11px;height:11px;border-radius:50%;margin-top:7px;flex:0 0 auto}.training .dot{background:var(--teal)}.infer .dot{background:var(--mauve)}.item b{color:var(--navy);display:block}.item span{font-size:12px;color:var(--muted)}
+.check{background:linear-gradient(135deg,var(--navy),#5c6088);color:white;border-radius:30px;padding:39px;display:grid;grid-template-columns:.83fr 1.17fr;gap:28px;align-items:center}.check h2{color:white;font-size:38px}.check p{color:rgba(255,255,255,.77)}.qs{display:grid;grid-template-columns:1fr 1fr;gap:9px}.q{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);padding:12px 13px;border-radius:14px;font-size:13px}.q b{color:var(--peach);margin-left:4px}.next{padding:31px 0 82px}.next .card{padding:24px 28px;display:flex;justify-content:space-between;align-items:center;gap:22px}.next h3{margin:0;color:var(--navy)}.next p{margin:3px 0 0;color:var(--muted)}.badge{padding:8px 12px;border-radius:999px;background:rgba(169,123,158,.14);color:#825c77;font-size:12px;font-weight:900}.foot{border-top:1px solid var(--line);padding:20px 0 30px;color:var(--muted);font-size:12px}
+@media(max-width:980px){.heroGrid,.spot,.check{grid-template-columns:1fr}.steps{grid-template-columns:repeat(2,1fr)}.types{grid-template-columns:1fr}.terms{grid-template-columns:repeat(3,1fr)}.sees{grid-template-columns:1fr}.pipeline{grid-template-columns:repeat(2,1fr)}.head{grid-template-columns:1fr}.no{padding:0}}
+@media(max-width:620px){.shell{width:min(100% - 24px,1180px)}.hero{padding-top:40px}.flow{grid-template-columns:1fr}.arrow{margin:auto;transform:rotate(90deg)}.steps,.compare,.qs,.pipeline{grid-template-columns:1fr}.terms{grid-template-columns:repeat(2,1fr)}.check{padding:26px}.next .card{align-items:flex-start;flex-direction:column}h1{font-size:41px}.lead{font-size:16px}}
+</style>
 </head>
-<body class="bg-gray-950 text-white font-['Tajawal'] min-h-screen">
+<body>
+<header class="top"><div class="shell topin"><a class="brand" href="#top"><span class="logo">AI</span><span>AI Graduation Lab</span></a><div class="lesson"><b>الدرس 01</b>من البيانات إلى التنبؤ</div></div></header>
+<main id="top">
+<section class="hero"><div class="shell heroGrid">
+<div><div class="eyebrow">الدرس التأسيسي — مناسب لكل مشاريع الـAI</div><h1>افهم مشروع الـAI كاملًا<br>من Dataset إلى Prediction</h1><p class="lead">في هذا الدرس لن نحفظ خوارزميات. سنفهم الصورة الكاملة: ما المشكلة؟ ما البيانات؟ ماذا يدخل إلى النموذج؟ كيف يتعلم؟ وكيف يتحول في النهاية إلى نتيجة يستخدمها موقعك أو تطبيقك؟</p><div class="actions"><a class="btn primary" href="#journey">ابدأ المسار الكامل ←</a><a class="btn ghost" href="#examples">شاهد الأمثلة الثلاثة</a></div><nav class="toc"><a href="#journey">المسار</a><a href="#terms">المصطلحات</a><a href="#examples">أنواع البيانات</a><a href="#training">التدريب</a><a href="#checkpoint">اختبر فهمك</a></nav></div>
+<aside class="heroCard"><div class="mini">الفكرة التي سنكررها طوال الدورة</div><div class="bigFlow">
+<div class="flow"><div class="box"><strong>بيانات حقيقية</strong><span>Network / Image / Audio</span></div><div class="arrow">←</div><div class="box"><strong>تجهيز البيانات</strong><span>تنظيف + تنظيم + Features</span></div></div>
+<div class="flow"><div class="box model"><strong>ML / AI Model</strong><span>يتعلم النمط من الأمثلة</span></div><div class="arrow">←</div><div class="box"><strong>Training</strong><span>تعلم من Train وتحقق من Validation</span></div></div>
+<div class="flow"><div class="box"><strong>Prediction</strong><span>Normal / Attack / Car / Fake...</span></div><div class="arrow">←</div><div class="box"><strong>Application</strong><span>Web / Desktop / Mobile</span></div></div>
+</div></aside></div></section>
 
-<header class="relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-purple-900/40 via-blue-900/30 to-teal-900/20"></div>
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-purple-500/10 rounded-full blur-[140px]"></div>
-    <div class="relative max-w-7xl mx-auto px-8 py-24 text-center">
-        <div class="inline-flex items-center gap-2 bg-purple-500/10 border border-purple-500/20 rounded-full px-6 py-2.5 text-purple-300 text-base mb-6">
-            🤖 دليل تعليمي تفاعلي شامل — AI & Data Training Guide
-        </div>
-        <h1 class="text-4xl md:text-6xl font-black leading-tight mb-6">
-            <span class="bg-gradient-to-l from-purple-400 via-blue-400 to-teal-400 bg-clip-text text-transparent">Artificial Intelligence</span>
-            <br>دليل الذكاء الاصطناعي وتدريب البيانات
-        </h1>
-        <p class="text-gray-400 text-xl max-w-3xl mx-auto leading-9 mb-6">
-            تعلّم كل ما تحتاجه لفهم الذكاء الاصطناعي <span class="term">AI</span> وتعلّم الآلة <span class="term">Machine Learning</span> وتدريب النماذج <span class="term">Model Training</span> من الصفر حتى الاحتراف.
-        </p>
-        <p class="text-gray-500 text-base">شرح مبسّط بالعربي • جميع المصطلحات بالإنجليزي • أمثلة واقعية • روابط مفيدة</p>
-    </div>
-</header>
+<section id="journey"><div class="shell"><div class="head"><div class="no">01 — الصورة الكاملة</div><div><h2>كل مشروع AI تقريبًا يمر بنفس الرحلة</h2><p>قد تتغير البيانات والخوارزمية، لكن طريقة التفكير الأساسية تبقى ثابتة. هذه السلسلة هي العمود الفقري لكل الدروس القادمة.</p></div></div>
+<div class="card steps">
+<article class="step"><span class="n">1</span><div><h3>حدد المشكلة</h3><p>ما الشيء الذي نريد من النظام أن يعرفه أو يتنبأ به؟</p></div></article>
+<article class="step"><span class="n">2</span><div><h3>اجمع Dataset</h3><p>أمثلة حقيقية تمثل المشكلة التي نريد حلها.</p></div></article>
+<article class="step"><span class="n">3</span><div><h3>افهم البيانات</h3><p>ما الـSample؟ ما الـFeatures؟ وما الـTarget أو Label؟</p></div></article>
+<article class="step"><span class="n">4</span><div><h3>جهّز البيانات</h3><p>تنظيف، Encoding، Scaling أو تحويل مناسب حسب نوع البيانات.</p></div></article>
+<article class="step"><span class="n">5</span><div><h3>درّب Model</h3><p>النموذج يبحث عن أنماط تربط المدخلات بالنتيجة الصحيحة.</p></div></article>
+<article class="step"><span class="n">6</span><div><h3>قيّم النتيجة</h3><p>نختبره على بيانات لم يتعلم منها ونتأكد أنه لا يحفظ فقط.</p></div></article>
+<article class="step"><span class="n">7</span><div><h3>ادمجه بالتطبيق</h3><p>يرسل التطبيق بيانات جديدة ويستقبل Prediction من النموذج.</p></div></article>
+</div><div class="rule"><strong>قاعدة الدرس الأول</strong><span>المشروع لا يبدأ من اختيار Model؛ يبدأ من سؤال واضح وDataset تمثل هذا السؤال.</span></div></div></section>
 
-<main class="max-w-7xl mx-auto px-8 pb-24 -mt-4">
-    <a href="summary.html" class="group block rounded-2xl border border-indigo-500/30 bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-pink-500/10 p-6 mb-6 hover:border-indigo-500/50 hover:from-indigo-500/15 hover:via-purple-500/15 hover:to-pink-500/15 transition-all duration-300 hover:-translate-y-1">
-        <div class="flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <div class="w-14 h-14 rounded-xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-3xl">⚡</div>
-                <div>
-                    <h2 class="text-xl font-black text-indigo-300 group-hover:text-indigo-200 transition">ملخص شامل في صفحة واحدة</h2>
-                    <p class="text-gray-400 text-sm">كل الفصول الخمسة مُلخّصة — مثالي للمراجعة السريعة</p>
-                </div>
-            </div>
-            <span class="text-indigo-400 text-2xl group-hover:translate-x-[-4px] transition">←</span>
-        </div>
-    </a>
-    <div class="grid md:grid-cols-2 gap-6">
+<section id="terms"><div class="shell"><div class="head"><div class="no">02 — اللغة الأساسية</div><div><h2>ستسمع هذه الكلمات في كل مشروع</h2><p>لا نحتاج تعريفات أكاديمية طويلة. نحتاج معنى عمليًا ثابتًا تستطيع رؤيته داخل Dataset أو Notebook.</p></div></div><div class="terms">
+<div class="term"><b>Dataset</b><span>مجموعة البيانات كاملة</span></div><div class="term"><b>Sample</b><span>مثال واحد من البيانات</span></div><div class="term"><b>Feature</b><span>معلومة تدخل إلى النموذج</span></div><div class="term"><b>Label / Target</b><span>الإجابة التي نريد تعلمها</span></div><div class="term"><b>Model</b><span>الخوارزمية بعد التعلم</span></div><div class="term"><b>Prediction</b><span>إجابة النموذج لبيانات جديدة</span></div>
+</div></div></section>
 
-        <a href="01_ai_intro.html" class="group block rounded-2xl border border-white/10 bg-white/5 p-7 hover:border-purple-500/40 hover:bg-purple-500/5 transition-all duration-300 hover:-translate-y-1">
-            <div class="flex items-start gap-5">
-                <div class="w-16 h-16 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-3xl shrink-0">🧠</div>
-                <div>
-                    <div class="text-sm text-purple-400 font-bold mb-1">Chapter 1 — الفصل الأول</div>
-                    <h2 class="text-2xl font-bold text-white mb-2 group-hover:text-purple-300 transition">ما هو الذكاء الاصطناعي؟ <span class="term">What is AI?</span></h2>
-                    <p class="text-gray-400 text-base leading-8">التعريف، أنواع الذكاء الاصطناعي <span class="term">AI Types</span>، التعلم الآلي <span class="term">ML</span>، التعلم العميق <span class="term">Deep Learning</span>، وكشف الأجسام <span class="term">Object Detection</span>.</p>
-                </div>
-            </div>
-        </a>
+<section id="examples"><div class="shell"><div class="head"><div class="no">03 — أنواع Dataset</div><div><h2>Dataset ليست دائمًا ملف Excel</h2><p>سنستخدم ثلاثة أمثلة طوال الدرس. الفكرة واحدة، لكن شكل الـSample والـFeatures يختلف حسب نوع البيانات.</p></div></div><div class="types">
+<article class="card type network"><span class="tag">NETWORK / TABULAR</span><h3>حركة الشبكة</h3><p>كل صف يمثل Network Flow. الأعمدة أرقام وخصائص مثل مدة الاتصال، عدد الحزم والبورت.</p><div class="code">Flow Duration · Protocol · Packets · Bytes → <b>Label</b></div></article>
+<article class="card type vision"><span class="tag">IMAGE / DETECTION</span><h3>كشف مركبة في صورة</h3><p>الـSample هنا صورة، ومعها Class وموقع الكائن داخل الصورة إذا كان المشروع Object Detection.</p><div class="code">image_001.jpg + Bounding Box → <b>Car</b></div></article>
+<article class="card type audio"><span class="tag">AUDIO / CLASSIFICATION</span><h3>صوت حقيقي أو مزيف</h3><p>الـSample ملف صوتي. يمكن تحويله إلى تمثيل مثل Spectrogram ثم يتعلم النموذج التمييز.</p><div class="code">voice_014.wav → Features → <b>Real / Fake</b></div></article>
+</div></div></section>
 
-        <a href="02_datasets.html" class="group block rounded-2xl border border-white/10 bg-white/5 p-7 hover:border-blue-500/40 hover:bg-blue-500/5 transition-all duration-300 hover:-translate-y-1">
-            <div class="flex items-start gap-5">
-                <div class="w-16 h-16 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-3xl shrink-0">📊</div>
-                <div>
-                    <div class="text-sm text-blue-400 font-bold mb-1">Chapter 2 — الفصل الثاني</div>
-                    <h2 class="text-2xl font-bold text-white mb-2 group-hover:text-blue-300 transition">البيانات والداتاسيت <span class="term">Datasets</span></h2>
-                    <p class="text-gray-400 text-base leading-8">أنواع البيانات <span class="term">Data Types</span>، التوصيف <span class="term">Annotation</span>، تقسيم البيانات <span class="term">Train/Val/Test Split</span>، وتحليل البيانات <span class="term">EDA</span>.</p>
-                </div>
-            </div>
-        </a>
+<section><div class="shell"><div class="head"><div class="no">04 — مثال ملموس</div><div><h2>لنقرأ Dataset شبكة كأنها جدول عادي</h2><p>هذه أول مهارة يحتاجها الطالب: أن ينظر للبيانات ويعرف ما الذي يدخل للنموذج وما الذي يُطلب منه أن يتعلمه.</p></div></div><div class="spot">
+<div class="card pad"><h3>كل صف = Sample واحد</h3><p>هنا كل صف يمثل اتصالًا أو Flow داخل الشبكة. معظم الأعمدة Features، والعمود الأخير هو Label.</p><div class="xy"><div class="xyb"><b>X</b><small>Features<br>المدخلات</small></div><div class="xya">→</div><div class="xyb"><b>y</b><small>Target<br>الإجابة</small></div></div></div>
+<div class="card pad"><div class="table"><table><thead><tr><th>Flow Duration</th><th>Protocol</th><th>Packets</th><th>Bytes</th><th>Dst Port</th><th>Label</th></tr></thead><tbody><tr><td>2.34</td><td>TCP</td><td>24</td><td>18,200</td><td>443</td><td class="ok">Normal</td></tr><tr><td>0.40</td><td>TCP</td><td>340</td><td>95,500</td><td>80</td><td class="attack">Attack</td></tr><tr><td>4.12</td><td>UDP</td><td>18</td><td>8,420</td><td>53</td><td class="ok">Normal</td></tr><tr><td>0.19</td><td>TCP</td><td>610</td><td>181,220</td><td>22</td><td class="attack">Attack</td></tr></tbody></table></div></div>
+</div></div></section>
 
-        <a href="03_training.html" class="group block rounded-2xl border border-white/10 bg-white/5 p-7 hover:border-teal-500/40 hover:bg-teal-500/5 transition-all duration-300 hover:-translate-y-1">
-            <div class="flex items-start gap-5">
-                <div class="w-16 h-16 rounded-xl bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-3xl shrink-0">⚙️</div>
-                <div>
-                    <div class="text-sm text-teal-400 font-bold mb-1">Chapter 3 — الفصل الثالث</div>
-                    <h2 class="text-2xl font-bold text-white mb-2 group-hover:text-teal-300 transition">التدريب وإعداداته <span class="term">Training & Hyperparameters</span></h2>
-                    <p class="text-gray-400 text-base leading-8">الدورات <span class="term">Epochs</span>، حجم الدفعة <span class="term">Batch Size</span>، معدل التعلم <span class="term">Learning Rate</span>، التعلم بالنقل <span class="term">Transfer Learning</span>، الضبط الدقيق <span class="term">Fine-tuning</span>.</p>
-                </div>
-            </div>
-        </a>
+<section><div class="shell"><div class="head"><div class="no">05 — ماذا يرى النموذج؟</div><div><h2>النموذج لا “يفهم” البيانات مثل الإنسان</h2><p>نحن نحول كل نوع من البيانات إلى تمثيل رقمي مناسب، ثم يتعلم النموذج الأنماط الموجودة داخل هذا التمثيل.</p></div></div><div class="sees">
+<article class="see"><div class="visual"><div class="bars"><i></i><i></i><i></i><i></i><i></i></div></div><h4>Tabular</h4><p>مجموعة قيم وخصائص رقمية أو فئوية بعد تجهيزها.</p></article>
+<article class="see"><div class="visual imgv"><div class="road"></div></div><h4>Image</h4><p>Pixels وأنماط بصرية، أو كائنات ومواقعها في Detection.</p></article>
+<article class="see"><div class="visual"><div class="wave"><i style="height:22px"></i><i style="height:48px"></i><i style="height:70px"></i><i style="height:35px"></i><i style="height:82px"></i><i style="height:58px"></i><i style="height:28px"></i><i style="height:64px"></i><i style="height:42px"></i><i style="height:76px"></i><i style="height:32px"></i></div></div><h4>Audio</h4><p>Waveform أو Spectrogram أو Features صوتية رقمية.</p></article>
+</div></div></section>
 
-        <a href="04_evaluation.html" class="group block rounded-2xl border border-white/10 bg-white/5 p-7 hover:border-amber-500/40 hover:bg-amber-500/5 transition-all duration-300 hover:-translate-y-1">
-            <div class="flex items-start gap-5">
-                <div class="w-16 h-16 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-3xl shrink-0">📈</div>
-                <div>
-                    <div class="text-sm text-amber-400 font-bold mb-1">Chapter 4 — الفصل الرابع</div>
-                    <h2 class="text-2xl font-bold text-white mb-2 group-hover:text-amber-300 transition">التقييم والمقاييس <span class="term">Evaluation & Metrics</span></h2>
-                    <p class="text-gray-400 text-base leading-8">الدقة <span class="term">Precision</span>، الاستدعاء <span class="term">Recall</span>، متوسط الدقة <span class="term">mAP</span>، مصفوفة التشويش <span class="term">Confusion Matrix</span>، الخسارة <span class="term">Loss</span>.</p>
-                </div>
-            </div>
-        </a>
+<section id="training"><div class="shell"><div class="head"><div class="no">06 — من Dataset إلى Model</div><div><h2>ما الذي يحدث أثناء التدريب؟</h2><p>في هذا الدرس يكفينا فهم التسلسل. تفاصيل التقسيم والتنظيف والتقييم ستأتي في دروس مستقلة.</p></div></div><div class="pipeline">
+<div class="pipe"><b>Dataset</b><span>البيانات الأصلية</span></div><div class="pipe"><b>Split</b><span>Train / Validation / Test</span></div><div class="pipe"><b>Preprocessing</b><span>تجهيز المدخلات</span></div><div class="pipe"><b>Training</b><span>النموذج يتعلم</span></div><div class="pipe"><b>Evaluation</b><span>اختبار على بيانات منفصلة</span></div><div class="pipe"><b>Saved Model</b><span>ملف جاهز للتطبيق</span></div>
+</div></div></section>
 
-        <a href="05_problems.html" class="group block rounded-2xl border border-white/10 bg-white/5 p-7 hover:border-rose-500/40 hover:bg-rose-500/5 transition-all duration-300 hover:-translate-y-1 md:col-span-2">
-            <div class="flex items-start gap-5">
-                <div class="w-16 h-16 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-3xl shrink-0">🛡️</div>
-                <div>
-                    <div class="text-sm text-rose-400 font-bold mb-1">Chapter 5 — الفصل الخامس</div>
-                    <h2 class="text-2xl font-bold text-white mb-2 group-hover:text-rose-300 transition">مشاكل البيانات الشائعة <span class="term">Common Data Problems</span></h2>
-                    <p class="text-gray-400 text-base leading-8">التحيز <span class="term">Bias</span>، تسريب البيانات <span class="term">Data Leakage</span>، عدم التوازن <span class="term">Imbalance</span>، الإفراط في التعلم <span class="term">Overfitting</span>، قصور التعلم <span class="term">Underfitting</span>.</p>
-                </div>
-            </div>
-        </a>
-    </div>
+<section><div class="shell"><div class="head"><div class="no">07 — بعد التدريب</div><div><h2>كيف يدخل الـAI داخل التطبيق؟</h2><p>التطبيق لا يعيد تدريب النموذج كل مرة. غالبًا يستخدم Model محفوظًا ليستقبل بيانات جديدة ويعيد Prediction.</p></div></div><div class="compare">
+<div class="card training"><h3>وقت التدريب — Training</h3><div class="item"><span class="dot"></span><div><b>يحتاج Dataset</b><span>يتعلم من عدد كبير من الأمثلة.</span></div></div><div class="item"><span class="dot"></span><div><b>يحدث قبل تشغيل النظام</b><span>داخل Notebook أو بيئة تدريب.</span></div></div><div class="item"><span class="dot"></span><div><b>النتيجة Model محفوظ</b><span>نستخدمه لاحقًا داخل النظام.</span></div></div></div>
+<div class="card infer"><h3>وقت الاستخدام — Inference</h3><div class="item"><span class="dot"></span><div><b>يدخل Sample جديد</b><span>Flow جديد، صورة جديدة، أو صوت جديد.</span></div></div><div class="item"><span class="dot"></span><div><b>النموذج لا يتعلم هنا</b><span>فقط يطبّق ما تعلمه سابقًا.</span></div></div><div class="item"><span class="dot"></span><div><b>يعيد Prediction</b><span>مثلاً Normal / Attack أو Real / Fake.</span></div></div></div>
+</div></div></section>
+
+<section id="checkpoint"><div class="shell"><div class="check"><div><div class="mini" style="color:var(--peach)">نهاية الدرس 01</div><h2>إذا فهمت هذه الأسئلة فأنت فهمت هيكل مشروعك</h2><p>لا تحفظ الإجابات. افتح Dataset مشروعك وحاول أن تجيب عنها بنفسك. الدروس القادمة ستفكك كل سؤال بالتفصيل.</p></div><div class="qs">
+<div class="q"><b>1</b>ما المشكلة التي يحلها الـAI؟</div><div class="q"><b>2</b>ما الذي يمثله Sample واحد؟</div><div class="q"><b>3</b>ما الـFeatures التي تدخل للنموذج؟</div><div class="q"><b>4</b>ما الـLabel أو Target؟</div><div class="q"><b>5</b>كيف ستصل البيانات إلى Model؟</div><div class="q"><b>6</b>كيف نعرف أن Model جيد فعلًا؟</div><div class="q"><b>7</b>ماذا سيستقبل التطبيق وماذا سيعيد؟</div><div class="q"><b>✓</b>هذه هي الخريطة التي سنبني عليها بقية الدورة.</div>
+</div></div></div></section>
+
+<div class="next"><div class="shell"><div class="card"><div><h3>الدرس التالي: Dataset — Rows, Features, Labels & Target</h3><p>سنفتح أنواع بيانات مختلفة ونشرح كيف تقرأ كل Dataset وتحدد نوع مشروعك منها.</p></div><span class="badge">قريبًا — Lesson 02</span></div></div></div>
 </main>
-
-<footer class="border-t border-white/5 py-8 text-center text-gray-500 text-sm">
-    دليل تعليمي مرجعي — AI & Machine Learning Guide for Beginners
-</footer>
-</body>
-</html>
+<footer class="foot"><div class="shell">AI Graduation Lab — Lesson 01 • صفحة تعليمية مصممة للتسجيل والشرح المباشر.</div></footer>
+</body></html>
